@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Examen BUAP (EGA-I / EGAV-I)</title>
+    <meta name="description"
+        content="Simulador de examen para preparación EGA-I y EGAV-I de la BUAP con 100 preguntas de razonamiento matemático y verbal">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Simulador de Examen BUAP</h1>
+        <p>Preparación Oficial EGA-I y EGAV-I</p>
+    </header>
+
+    <div class="main-container">
+
+        <section id="quiz-container">
+            <div class="question-header">
+                <span id="question-progress">Pregunta 1 de 100</span>
+                <span id="question-subject">Cargando...</span>
+            </div>
+
+            <div class="question-content">
+                <p id="question-text" class="question-text">
+                    El examen se está inicializando. Por favor espera un momento...
+                </p>
+
+                <form id="options-form" class="options-container">
+                    <label class="option-label" for="opt-A">
+                        <input type="radio" name="option" value="A" id="opt-A" class="option-input">
+                        <div class="custom-radio"></div>
+                        <span class="option-text" id="text-option-A">Opción A</span>
+                    </label>
+
+                    <label class="option-label" for="opt-B">
+                        <input type="radio" name="option" value="B" id="opt-B" class="option-input">
+                        <div class="custom-radio"></div>
+                        <span class="option-text" id="text-option-B">Opción B</span>
+                    </label>
+
+                    <label class="option-label" for="opt-C">
+                        <input type="radio" name="option" value="C" id="opt-C" class="option-input">
+                        <div class="custom-radio"></div>
+                        <span class="option-text" id="text-option-C">Opción C</span>
+                    </label>
+
+                    <label class="option-label" for="opt-D">
+                        <input type="radio" name="option" value="D" id="opt-D" class="option-input">
+                        <div class="custom-radio"></div>
+                        <span class="option-text" id="text-option-D">Opción D</span>
+                    </label>
+                </form>
+            </div>
+
+            <div class="navigation-buttons">
+                <button id="btn-prev" class="btn btn-secondary" disabled>Anterior</button>
+                <div style="display: flex; gap: 10px; width: 100%; justify-content: flex-end;">
+                    <button id="btn-next" class="btn btn-primary">Siguiente</button>
+                    <button id="btn-finish" class="btn btn-finish">Finalizar Examen</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="results-container" class="results-section hidden">
+            <h2 style="color: var(--buap-blue);">Resultados del Simulacro</h2>
+
+            <div class="score-circle">
+                <span id="final-score" class="score-number">0</span>
+                <span id="total-questions-display" class="score-total">/ 100</span>
+            </div>
+
+            <h3 style="color: #666; margin-bottom: 20px;">Desglose por Áreas</h3>
+
+            <div id="detailed-stats" class="stats-grid">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
+
+            <div id="subtopic-stats-container" style="margin-top: 40px; text-align: left;">
+                <h3 style="color: #666; border-bottom: 2px solid #eee; padding-bottom: 10px;">Detalle por Subtemas</h3>
+                <div id="subtopic-stats" class="stats-grid">
+                    <!-- Subtopic stats will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="navigation-buttons" style="justify-content: center; border: none;">
+                <button id="btn-restart" class="btn btn-primary">Realizar nuevo intento</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
