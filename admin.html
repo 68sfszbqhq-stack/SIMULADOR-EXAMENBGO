@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Simulador BUAP</title>
+    <link rel="stylesheet" href="admin.css">
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>📊 Panel de Resultados - Simulador BUAP</h1>
+            <p>Vista de resultados de alumnos</p>
+        </header>
+
+        <!-- Estadísticas Generales -->
+        <section class="stats-summary">
+            <div class="stat-box">
+                <h3 id="total-exams">0</h3>
+                <p>Total de Exámenes</p>
+            </div>
+            <div class="stat-box">
+                <h3 id="average-score">0%</h3>
+                <p>Promedio General</p>
+            </div>
+            <div class="stat-box">
+                <h3 id="approved-count">0</h3>
+                <p>Aprobados (≥60%)</p>
+            </div>
+            <div class="stat-box">
+                <h3 id="approved-percentage">0%</h3>
+                <p>% de Aprobación</p>
+            </div>
+        </section>
+
+        <!-- Filtros y Acciones -->
+        <section class="filters">
+            <input type="text" id="search-input" placeholder="Buscar por nombre o matrícula...">
+            <select id="filter-date">
+                <option value="">Todas las fechas</option>
+            </select>
+            <button onclick="exportToCSV()" class="btn btn-export">📥 Exportar CSV</button>
+            <button onclick="loadResults()" class="btn btn-refresh">🔄 Actualizar</button>
+        </section>
+
+        <!-- Tabla de Resultados -->
+        <section class="results-table-container">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Matrícula</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Duración</th>
+                        <th>Calificación</th>
+                        <th>%</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="results-tbody">
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px;">
+                            Cargando resultados...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Modal de Detalles -->
+        <div id="details-modal" class="modal hidden">
+            <div class="modal-content-large">
+                <span class="close-btn" onclick="closeDetailsModal()">&times;</span>
+                <div id="details-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
