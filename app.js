@@ -4,6 +4,14 @@ let currentQuestionIndex = 0;
 // Objeto para guardar respuestas: { id_pregunta: 'A', id_pregunta_2: 'B', ... }
 let userAnswers = {};
 
+// Datos del alumno
+let studentData = {
+    nombre: '',
+    matricula: '',
+    email: '',
+    startTime: null
+};
+
 // --- FUNCIONES DE PERSISTENCIA ---
 
 // Cargar datos guardados del localStorage
@@ -218,7 +226,7 @@ function renderResults(results) {
 }
 
 // Finalizar el examen y mostrar resultados
-function finishQuiz() {
+async function finishQuiz() {
     if (confirm("¿Estás seguro de que deseas finalizar el examen?")) {
         const results = calculateResults();
         renderResults(results);
@@ -228,6 +236,40 @@ function finishQuiz() {
 
         window.scrollTo(0, 0);
         console.log("Examen finalizado. Respuestas enviadas:", userAnswers);
+
+        // Calcular duración del examen
+        const endTime = new Date();
+        const duration = studentData.startTime ?
+            Math.round((endTime - studentData.startTime) / 60000) : 0; // en minutos
+
+        // Enviar resultados a Firebase
+        try {
+            const firebaseResult = await guardarResultadosEnFirebase(
+                {
+                    ...studentData,
+                    duracion: `${duration} minutos`
+                },
+                results
+            );
+
+            if (firebaseResult.success) {
+                // Mostrar confirmación
+                document.getElementById('confirm-score').textContent =
+                    `${results.totalCorrect}/${results.totalQuestions} (${results.percentage}%)`;
+                document.getElementById('confirmation-modal').classList.remove('hidden');
+
+                // Ocultar después de 3 segundos
+                setTimeout(() => {
+                    document.getElementById('confirmation-modal').classList.add('hidden');
+                }, 3000);
+            } else {
+                console.error('Error al enviar resultados:', firebaseResult.error);
+                alert('Tus resultados se guardaron localmente, pero no se pudieron enviar al servidor. Por favor, contacta al profesor.');
+            }
+        } catch (error) {
+            console.error('Error al enviar a Firebase:', error);
+            alert('Tus resultados se guardaron localmente, pero no se pudieron enviar al servidor.');
+        }
     }
 }
 
@@ -320,5 +362,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadQuestion(currentQuestionIndex);
+    // Manejar el formulario de identificación del alumno
+    const studentForm = document.getElementById('student-form');
+    const studentModal = document.getElementById('student-modal');
+
+    studentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Guardar datos del alumno
+        studentData.nombre = document.getElementById('student-name').value.trim();
+        studentData.matricula = document.getElementById('student-matricula').value.trim();
+        studentData.email = document.getElementById('student-email').value.trim();
+        studentData.startTime = new Date();
+
+        // Ocultar modal y cargar primera pregunta
+        studentModal.classList.add('hidden');
+        loadQuestion(currentQuestionIndex);
+
+        console.log('Alumno identificado:', studentData);
+    });
+
+    // Si hay progreso guardado, ocultar el modal de identificación
+    if (answeredCount > 0) {
+        studentModal.classList.add('hidden');
+        loadQuestion(currentQuestionIndex);
+    }
 });
