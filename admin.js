@@ -1,83 +1,13 @@
 // admin.js - Panel de Administración
 
-// ========== SISTEMA DE AUTENTICACIÓN ==========
-const ADMIN_PASSWORD = '2019';
-
-// Verificar autenticación al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Panel de administración cargado');
-
-    // Verificar si ya está autenticado
-    const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
-
-    if (isAuthenticated === 'true') {
-        showAdminPanel();
-    } else {
-        showLoginScreen();
-    }
-});
-
-// Función para verificar contraseña
-function checkPassword(event) {
-    event.preventDefault();
-
-    const passwordInput = document.getElementById('admin-password');
-    const errorMessage = document.getElementById('error-message');
-    const enteredPassword = passwordInput.value;
-
-    if (enteredPassword === ADMIN_PASSWORD) {
-        // Contraseña correcta
-        sessionStorage.setItem('adminAuthenticated', 'true');
-        showAdminPanel();
-        loadResults(); // Cargar resultados después del login
-    } else {
-        // Contraseña incorrecta
-        errorMessage.classList.remove('hidden');
-        passwordInput.value = '';
-        passwordInput.focus();
-
-        // Ocultar mensaje de error después de 3 segundos
-        setTimeout(() => {
-            errorMessage.classList.add('hidden');
-        }, 3000);
-    }
-
-    return false;
-}
-
-// Mostrar pantalla de login
-function showLoginScreen() {
-    document.getElementById('login-screen').classList.remove('hidden');
-    document.getElementById('admin-panel').classList.add('hidden');
-}
-
-// Mostrar panel de administración
-function showAdminPanel() {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('admin-panel').classList.remove('hidden');
-}
-
-// Cerrar sesión
-function logout() {
-    sessionStorage.removeItem('adminAuthenticated');
-    showLoginScreen();
-
-    // Limpiar datos
-    allResults = [];
-    filteredResults = [];
-    document.getElementById('results-tbody').innerHTML = `
-        <tr>
-            <td colspan="9" style="text-align: center; padding: 40px;">
-                Sesión cerrada
-            </td>
-        </tr>
-    `;
-}
-
-// ========== FIN SISTEMA DE AUTENTICACIÓN ==========
-
 let allResults = [];
 let filteredResults = [];
+
+// Cargar resultados al iniciar
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Panel de administración cargado');
+    loadResults();
+});
 
 // Cargar todos los resultados de Firebase
 async function loadResults() {

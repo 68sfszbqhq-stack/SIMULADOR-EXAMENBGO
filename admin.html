@@ -13,25 +13,10 @@
 </head>
 
 <body>
-    <!-- Pantalla de Login -->
-    <div id="login-screen" class="login-container">
-        <div class="login-box">
-            <h1>🔐 Acceso Administrativo</h1>
-            <p>Panel de Resultados - Bachillerato</p>
-            <form id="login-form" onsubmit="return checkPassword(event)">
-                <input type="password" id="admin-password" placeholder="Ingrese contraseña" required autofocus>
-                <button type="submit" class="btn-login">Ingresar</button>
-                <p id="error-message" class="error-message hidden">❌ Contraseña incorrecta</p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Panel de Administración (oculto hasta login) -->
-    <div id="admin-panel" class="admin-container hidden">
+    <div class="admin-container">
         <header class="admin-header">
             <h1>📊 Panel de Resultados - Bachillerato</h1>
             <p>Vista de resultados de alumnos de 2° y 3° año</p>
-            <button onclick="logout()" class="btn-logout">🚪 Cerrar Sesión</button>
         </header>
 
         <!-- Estadísticas Generales -->
