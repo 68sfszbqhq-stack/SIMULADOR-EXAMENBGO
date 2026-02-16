@@ -68,8 +68,12 @@ function renderTable(results) {
         const scoreClass = percentage >= 80 ? 'score-excellent' :
             percentage >= 60 ? 'score-good' : 'score-poor';
 
+        const grado = result.alumno.grado || 'N/A';
+        const gradoLabel = grado === '2' ? '2°' : grado === '3' ? '3°' : grado;
+
         return `
             <tr>
+                <td><strong>${gradoLabel}</strong></td>
                 <td>${result.alumno.nombre}</td>
                 <td>${result.alumno.matricula}</td>
                 <td>${result.examen.fecha}</td>
@@ -97,16 +101,22 @@ function viewDetails(result) {
     const content = document.getElementById('details-content');
 
     // Construir HTML de detalles
+    const gradoLabel = result.alumno.grado === '2' ? '2° Año' : result.alumno.grado === '3' ? '3° Año' : 'No especificado';
+
     let detailsHTML = `
         <div class="student-info">
             <h3>Información del Alumno</h3>
             <div class="info-grid">
                 <div class="info-item">
+                    <strong>Grado:</strong>
+                    ${gradoLabel}
+                </div>
+                <div class="info-item">
                     <strong>Nombre:</strong>
                     ${result.alumno.nombre}
                 </div>
                 <div class="info-item">
-                    <strong>Matrícula:</strong>
+                    <strong>NIA:</strong>
                     ${result.alumno.matricula}
                 </div>
                 <div class="info-item">
@@ -209,10 +219,12 @@ function populateDateFilter() {
 
 // Filtrar resultados
 document.getElementById('search-input').addEventListener('input', filterResults);
+document.getElementById('filter-grade').addEventListener('change', filterResults);
 document.getElementById('filter-date').addEventListener('change', filterResults);
 
 function filterResults() {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const selectedGrade = document.getElementById('filter-grade').value;
     const selectedDate = document.getElementById('filter-date').value;
 
     filteredResults = allResults.filter(result => {
@@ -220,9 +232,10 @@ function filterResults() {
             result.alumno.nombre.toLowerCase().includes(searchTerm) ||
             result.alumno.matricula.toLowerCase().includes(searchTerm);
 
+        const matchesGrade = !selectedGrade || (result.alumno.grado === selectedGrade);
         const matchesDate = !selectedDate || result.examen.fecha === selectedDate;
 
-        return matchesSearch && matchesDate;
+        return matchesSearch && matchesGrade && matchesDate;
     });
 
     renderTable(filteredResults);

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Examen BUAP (EGA-I / EGAV-I)</title>
+    <title>Simulador de Examen - Bachillerato (2° y 3° Año)</title>
     <meta name="description"
-        content="Simulador de examen para preparación EGA-I y EGAV-I de la BUAP con 100 preguntas de razonamiento matemático y verbal">
+        content="Simulador de examen para estudiantes de 2° y 3° año de bachillerato con preguntas por materia">
     <link rel="stylesheet" href="styles.css">
 
     <!-- Firebase CDN -->
@@ -17,8 +17,8 @@
 <body>
 
     <header>
-        <h1>Simulador de Examen BUAP</h1>
-        <p>Preparación Oficial EGA-I y EGAV-I</p>
+        <h1>🎓 Simulador de Examen - Bachillerato</h1>
+        <p>Sistema de Evaluación para 2° y 3° Año</p>
     </header>
 
     <div class="main-container">
@@ -101,22 +101,30 @@
     <!-- Modal de Identificación del Alumno -->
     <div id="student-modal" class="modal">
         <div class="modal-content">
-            <h2>Identificación del Alumno</h2>
+            <h2>📋 Identificación del Alumno</h2>
             <p>Por favor, ingresa tus datos antes de comenzar el examen:</p>
             <form id="student-form">
+                <div class="form-group">
+                    <label for="student-grade">Grado: *</label>
+                    <select id="student-grade" required>
+                        <option value="">Selecciona tu grado</option>
+                        <option value="2">2° Año (Tercer Semestre)</option>
+                        <option value="3">3° Año (Quinto Semestre)</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="student-name">Nombre completo: *</label>
                     <input type="text" id="student-name" required placeholder="Ej: Juan Pérez García">
                 </div>
                 <div class="form-group">
-                    <label for="student-matricula">Matrícula: *</label>
+                    <label for="student-matricula">NIA (Número de Identificación del Alumno): *</label>
                     <input type="text" id="student-matricula" required placeholder="Ej: 201912345">
                 </div>
                 <div class="form-group">
-                    <label for="student-email">Email (opcional):</label>
-                    <input type="email" id="student-email" placeholder="Ej: alumno@alumno.buap.mx">
+                    <label for="student-email">Correo electrónico: *</label>
+                    <input type="email" id="student-email" required placeholder="Ej: alumno@ejemplo.com">
                 </div>
-                <button type="submit" class="btn btn-primary">Comenzar Examen</button>
+                <button type="submit" class="btn btn-primary">🚀 Comenzar Examen</button>
             </form>
         </div>
     </div>
@@ -133,7 +141,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="questions.js"></script>
+    <script src="questions-multigrado.js"></script>
     <script src="app.js"></script>
 
 </body>

@@ -1,95 +1,158 @@
-# Simulador de Examen BUAP
+# 🎓 Simulador de Examen Multi-Grado - Bachillerato
 
-Simulador interactivo para preparación de los exámenes EGA-I y EGAV-I de la BUAP (Benemérita Universidad Autónoma de Puebla).
+Sistema de exámenes en línea para estudiantes de **2° y 3° año de bachillerato** con panel de administración completo.
 
-🔗 **[Ver Demo en Vivo](https://TU-USUARIO.github.io/buap-exam-simulator/)**
+## 📊 Características
 
-## 🎯 Características
+### Para Estudiantes
+- ✅ **Selector de grado** (2° o 3° año)
+- ✅ **Registro completo**: Nombre, NIA, Correo electrónico
+- ✅ **Exámenes personalizados por grado**:
+  - **2° Año**: 45 preguntas (9 materias)
+  - **3° Año**: 35 preguntas (7 materias)
+- ✅ **Guardado automático** de respuestas
+- ✅ **Navegación intuitiva** entre preguntas
+- ✅ **Resultados detallados** por materia y subtema
+- ✅ **Envío automático** a Firebase
 
-- **100 preguntas** divididas en:
-  - 50 preguntas de Razonamiento Matemático
-  - 50 preguntas de Razonamiento Verbal
-- **Navegación intuitiva** entre preguntas
-- **Guardado automático** de respuestas usando localStorage
-- **Resultados detallados** con análisis por áreas y subtemas
-- **Barras de progreso** con código de colores (Rojo/Amarillo/Verde)
-- **Interfaz responsive** para dispositivos móviles
-- **Atajos de teclado** para navegación rápida
+### Para Administradores
+- ✅ **Panel de administración** completo
+- ✅ **Filtros avanzados**:
+  - Por grado (2° o 3°)
+  - Por fecha
+  - Por nombre o NIA
+- ✅ **Estadísticas generales**:
+  - Total de exámenes
+  - Promedio general
+  - Aprobados
+  - % de aprobación
+- ✅ **Vista detallada** de cada examen
+- ✅ **Exportación a CSV**
+- ✅ **Historial completo** de todos los exámenes
 
-## 🚀 Cómo usar
+## 📚 Materias por Grado
 
-### Opción 1: Usar en línea
-Visita: [https://TU-USUARIO.github.io/buap-exam-simulator/](https://TU-USUARIO.github.io/buap-exam-simulator/)
+### 2° Año (Tercer Semestre) - 45 preguntas
+1. Probabilidad y Estadística I (5)
+2. Cultura Digital (5)
+3. Lengua y Comunicación II (5)
+4. Inglés III (5)
+5. Ecosistema, Interacciones, Energía y Dinámica (5)
+6. Taller de Ciencias II (5)
+7. Conserva frutas, verduras y legumbres (5)
+8. Transforma cereales - Nixtamalización (5)
+9. Pensamiento Matemático III (5)
+
+### 3° Año (Quinto Semestre) - 35 preguntas
+1. Salud Integral I (5)
+2. Conciencia Histórica II (5)
+3. Sexualidad y Género (5)
+4. Derecho y Sociedad I (5)
+5. Obtiene bebidas no alcohólicas (5)
+6. Prepara productos de carnes (5)
+7. Taller del Pensamiento (5)
+
+## 🚀 Instalación y Uso
+
+### Opción 1: Usar en línea (GitHub Pages)
+1. Visita: `https://TU-USUARIO.github.io/SIMULADOR-EXAMENBGO/`
 
 ### Opción 2: Usar localmente
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/TU-USUARIO/buap-exam-simulator.git
+   git clone https://github.com/TU-USUARIO/SIMULADOR-EXAMENBGO.git
    ```
-2. Abre el archivo `index.html` en tu navegador web
+2. Abre `index.html` en tu navegador
 
-## 💾 Persistencia de Datos
+### Panel de Administración
+- Accede a `admin.html` para ver todos los resultados
+- Filtra por grado, fecha o busca por nombre/NIA
+- Exporta los datos a CSV para análisis
 
-El simulador guarda automáticamente tu progreso en el navegador usando localStorage:
-- ✅ Respuestas guardadas automáticamente
-- ✅ Posición actual en el examen
-- ✅ Puedes cerrar el navegador y continuar después
-- ✅ Opción para reiniciar y borrar datos
-
-## ⌨️ Atajos de teclado
-
-- **Flecha izquierda (←)**: Pregunta anterior
-- **Flecha derecha (→)**: Pregunta siguiente
-- **Enter**: Finalizar examen (solo en la última pregunta)
-
-## 📊 Resultados
-
-Al finalizar el examen verás:
-- Puntuación total (sobre 100)
-- Porcentaje de aciertos
-- Desglose por áreas principales
-- Análisis detallado por subtemas
-- Barras de progreso con código de colores:
-  - 🔴 Rojo: < 60% (necesita mejorar)
-  - 🟡 Amarillo: 60-79% (bien)
-  - 🟢 Verde: ≥ 80% (excelente)
-
-## 🛠️ Estructura del proyecto
+## 📁 Estructura del Proyecto
 
 ```
-buap-exam-simulator/
-├── index.html       # Estructura HTML principal
-├── styles.css       # Estilos CSS
-├── questions.js     # Banco de 100 preguntas
-├── app.js          # Lógica de la aplicación
-└── README.md       # Este archivo
+SIMULADOR-EXAMENBGO/
+├── index.html                  # Página principal del examen
+├── admin.html                  # Panel de administración
+├── styles.css                  # Estilos generales
+├── admin.css                   # Estilos del panel admin
+├── app.js                      # Lógica del examen
+├── admin.js                    # Lógica del panel admin
+├── questions-multigrado.js     # Banco de 80 preguntas
+├── firebase-config.js          # Configuración de Firebase
+└── README.md                   # Este archivo
+```
+
+## 🔧 Configuración de Firebase
+
+El proyecto usa Firebase Firestore para almacenar los resultados. La configuración está en `firebase-config.js`.
+
+### Estructura de datos en Firestore
+
+```javascript
+{
+  alumno: {
+    grado: "2",                    // "2" o "3"
+    nombre: "Juan Pérez García",
+    matricula: "201912345",        // NIA
+    email: "alumno@ejemplo.com"
+  },
+  examen: {
+    fecha: "16/02/2026",
+    hora: "10:30:45",
+    timestamp: Timestamp,
+    duracion: "25 minutos"
+  },
+  resultados: {
+    totalCorrectas: 35,
+    totalPreguntas: 45,
+    porcentaje: 77.8,
+    respuestas: {...},
+    porMateria: {...},
+    porSubtema: {...}
+  }
+}
+```
+
+## 💾 Copia de Seguridad
+
+Se crearon dos copias de seguridad antes de implementar el sistema multi-grado:
+
+1. **Carpeta local**: `SIMULADOR-EXAMENBGO-BACKUP-20260216-XXXXXX/`
+2. **Rama Git**: `backup-antes-multi-grado-20260216`
+
+Para restaurar la versión anterior:
+```bash
+git checkout backup-antes-multi-grado-20260216
 ```
 
 ## 🎨 Personalización
 
 ### Agregar más preguntas
 
-Edita el archivo `questions.js` y agrega objetos con el siguiente formato:
+Edita `questions-multigrado.js` y agrega objetos en el formato:
 
 ```javascript
 {
-    id: 101,
-    enunciado: "Texto de la pregunta",
-    opciones: {
+    id: 81,
+    grado: "2",  // "2" o "3"
+    subject: "Nombre de la Materia",
+    subtema: "Subtema específico",
+    question: "Texto de la pregunta",
+    options: {
         A: "Opción A",
         B: "Opción B",
         C: "Opción C",
         D: "Opción D"
     },
-    correcta: "B", // Letra de la respuesta correcta
-    bloque: "Razonamiento Matemático", // o "Razonamiento Verbal"
-    subtema: "Álgebra básica" // Subtema específico
+    correct: "B"
 }
 ```
 
 ### Modificar colores
 
-Los colores principales están definidos en `styles.css` como variables CSS:
+Los colores principales están en `styles.css`:
 
 ```css
 :root {
@@ -97,7 +160,6 @@ Los colores principales están definidos en `styles.css` como variables CSS:
     --buap-light-blue: #00b5e2;
     --success: #28a745;
     --warning: #ffc107;
-    --danger: #dc3545;
 }
 ```
 
@@ -108,37 +170,14 @@ Los colores principales están definidos en `styles.css` como variables CSS:
 - ✅ Safari (versiones recientes)
 - ✅ Dispositivos móviles (responsive)
 
-## 🚀 Publicar en GitHub Pages
+## 🔮 Características Futuras
 
-1. Crea un repositorio en GitHub
-2. Sube los archivos:
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/TU-USUARIO/buap-exam-simulator.git
-   git push -u origin main
-   ```
-3. Ve a Settings → Pages
-4. En "Source", selecciona la rama `main` y carpeta `/ (root)`
-5. Haz clic en "Save"
-6. Tu sitio estará disponible en: `https://TU-USUARIO.github.io/buap-exam-simulator/`
-
-## 📝 Notas
-
-- Las respuestas se guardan automáticamente en localStorage
-- Puedes navegar libremente entre preguntas antes de finalizar
-- El simulador no tiene límite de tiempo
-- Los datos se mantienen incluso si cierras el navegador
-
-## 🔮 Mejoras futuras sugeridas
-
+- [ ] Gráficas interactivas en el panel admin (Chart.js)
+- [ ] Comparativas entre grados
+- [ ] Estadísticas por materia
+- [ ] Exportar resultados a PDF
 - [ ] Temporizador de examen opcional
 - [ ] Modo de revisión (ver respuestas correctas/incorrectas)
-- [ ] Exportar resultados a PDF
-- [ ] Más categorías de preguntas
-- [ ] Modo práctica por materia específica
-- [ ] Estadísticas históricas de intentos
 
 ## 📄 Licencia
 
@@ -146,4 +185,5 @@ Este proyecto es de código abierto y está disponible para uso educativo.
 
 ---
 
-**Desarrollado para estudiantes de la BUAP** 🎓
+**Desarrollado para estudiantes de Bachillerato** 🎓
+**Versión Multi-Grado 2.0** - Febrero 2026

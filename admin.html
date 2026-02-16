@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración - Simulador BUAP</title>
+    <title>Panel de Administración - Simulador Bachillerato</title>
     <link rel="stylesheet" href="admin.css">
 
     <!-- Firebase CDN -->
@@ -15,8 +15,8 @@
 <body>
     <div class="admin-container">
         <header class="admin-header">
-            <h1>📊 Panel de Resultados - Simulador BUAP</h1>
-            <p>Vista de resultados de alumnos</p>
+            <h1>📊 Panel de Resultados - Bachillerato</h1>
+            <p>Vista de resultados de alumnos de 2° y 3° año</p>
         </header>
 
         <!-- Estadísticas Generales -->
@@ -41,7 +41,12 @@
 
         <!-- Filtros y Acciones -->
         <section class="filters">
-            <input type="text" id="search-input" placeholder="Buscar por nombre o matrícula...">
+            <input type="text" id="search-input" placeholder="Buscar por nombre o NIA...">
+            <select id="filter-grade">
+                <option value="">Todos los grados</option>
+                <option value="2">2° Año</option>
+                <option value="3">3° Año</option>
+            </select>
             <select id="filter-date">
                 <option value="">Todas las fechas</option>
             </select>
@@ -54,8 +59,9 @@
             <table id="results-table">
                 <thead>
                     <tr>
+                        <th>Grado</th>
                         <th>Nombre</th>
-                        <th>Matrícula</th>
+                        <th>NIA</th>
                         <th>Fecha</th>
                         <th>Hora</th>
                         <th>Duración</th>
@@ -66,7 +72,7 @@
                 </thead>
                 <tbody id="results-tbody">
                     <tr>
-                        <td colspan="8" style="text-align: center; padding: 40px;">
+                        <td colspan="9" style="text-align: center; padding: 40px;">
                             Cargando resultados...
                         </td>
                     </tr>

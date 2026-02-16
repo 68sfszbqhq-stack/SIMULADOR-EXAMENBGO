@@ -24,7 +24,8 @@ async function guardarResultadosEnFirebase(datosAlumno, resultados) {
             alumno: {
                 nombre: datosAlumno.nombre,
                 matricula: datosAlumno.matricula,
-                email: datosAlumno.email || ''
+                email: datosAlumno.email || '',
+                grado: datosAlumno.grado || ''
             },
             examen: {
                 fecha: new Date().toLocaleDateString('es-MX'),

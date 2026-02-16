@@ -4,11 +4,16 @@ let currentQuestionIndex = 0;
 // Objeto para guardar respuestas: { id_pregunta: 'A', id_pregunta_2: 'B', ... }
 let userAnswers = {};
 
+// Grado seleccionado y banco de preguntas activo
+let selectedGrade = null;
+let activeQuestionBank = [];
+
 // Datos del alumno
 let studentData = {
     nombre: '',
     matricula: '',
     email: '',
+    grado: '',
     startTime: null
 };
 
@@ -31,7 +36,7 @@ function loadSavedData() {
 
     if (savedIndex) {
         currentQuestionIndex = parseInt(savedIndex, 10);
-        if (isNaN(currentQuestionIndex) || currentQuestionIndex < 0 || currentQuestionIndex >= questionBank.length) {
+        if (isNaN(currentQuestionIndex) || currentQuestionIndex < 0 || currentQuestionIndex >= activeQuestionBank.length) {
             currentQuestionIndex = 0;
         }
     }
@@ -80,11 +85,11 @@ const domTotalQuestions = document.getElementById('total-questions-display');
 // --- FUNCIONES DE LÓGICA DE NAVEGACIÓN ---
 
 function loadQuestion(index) {
-    const questionData = questionBank[index];
+    const questionData = activeQuestionBank[index];
 
     domQuestionText.textContent = questionData.question;
     domQuestionSubject.textContent = `${questionData.subject}${questionData.subtema ? ' - ' + questionData.subtema : ''}`;
-    domQuestionProgress.textContent = `Pregunta ${index + 1} de ${questionBank.length}`;
+    domQuestionProgress.textContent = `Pregunta ${index + 1} de ${activeQuestionBank.length}`;
 
     domTextOptionA.textContent = questionData.options.A;
     domTextOptionB.textContent = questionData.options.B;
@@ -104,7 +109,7 @@ function loadQuestion(index) {
 
     domBtnPrev.disabled = (index === 0);
 
-    if (index === questionBank.length - 1) {
+    if (index === activeQuestionBank.length - 1) {
         domBtnNext.style.display = 'none';
         domBtnFinish.style.display = 'inline-block';
     } else {
@@ -119,7 +124,7 @@ function loadQuestion(index) {
 }
 
 function saveAnswer(selectedOption) {
-    const currentQuestion = questionBank[currentQuestionIndex];
+    const currentQuestion = activeQuestionBank[currentQuestionIndex];
     userAnswers[currentQuestion.id] = selectedOption;
     console.log("Respuestas actuales:", userAnswers);
 
@@ -134,7 +139,7 @@ function calculateResults() {
     let statsBloques = {};
     let statsSubtemas = {};
 
-    questionBank.forEach(q => {
+    activeQuestionBank.forEach(q => {
         const userAnswer = userAnswers[q.id];
         const isCorrect = (userAnswer === q.correct);
 
@@ -159,7 +164,8 @@ function calculateResults() {
 
     return {
         totalCorrect,
-        totalQuestions: questionBank.length,
+        totalQuestions: activeQuestionBank.length,
+        percentage: Math.round((totalCorrect / activeQuestionBank.length) * 100),
         statsBloques,
         statsSubtemas,
         answeredQuestions: Object.keys(userAnswers).length
@@ -309,7 +315,7 @@ domBtnPrev.addEventListener('click', () => {
 
 // Botón Siguiente
 domBtnNext.addEventListener('click', () => {
-    if (currentQuestionIndex < questionBank.length - 1) {
+    if (currentQuestionIndex < activeQuestionBank.length - 1) {
         currentQuestionIndex++;
         loadQuestion(currentQuestionIndex);
     }
@@ -328,10 +334,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft' && currentQuestionIndex > 0) {
             currentQuestionIndex--;
             loadQuestion(currentQuestionIndex);
-        } else if (e.key === 'ArrowRight' && currentQuestionIndex < questionBank.length - 1) {
+        } else if (e.key === 'ArrowRight' && currentQuestionIndex < activeQuestionBank.length - 1) {
             currentQuestionIndex++;
             loadQuestion(currentQuestionIndex);
-        } else if (e.key === 'Enter' && currentQuestionIndex === questionBank.length - 1) {
+        } else if (e.key === 'Enter' && currentQuestionIndex === activeQuestionBank.length - 1) {
             finishQuiz();
         }
     }
@@ -340,8 +346,8 @@ document.addEventListener('keydown', (e) => {
 // --- INICIALIZACIÓN ---
 // Cargar la primera pregunta al abrir la página
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Simulador BUAP cargado correctamente');
-    console.log(`Total de preguntas: ${questionBank.length}`);
+    console.log('Simulador Multi-Grado cargado correctamente');
+    console.log('Bancos de preguntas disponibles:', getGradeStats());
 
     // Cargar datos guardados si existen
     loadSavedData();
@@ -370,16 +376,34 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         // Guardar datos del alumno
+        const gradeSelect = document.getElementById('student-grade');
+        selectedGrade = gradeSelect.value;
+
+        if (!selectedGrade) {
+            alert('Por favor selecciona tu grado');
+            return;
+        }
+
+        // Cargar banco de preguntas según el grado
+        activeQuestionBank = getQuestionsByGrade(selectedGrade);
+
+        if (activeQuestionBank.length === 0) {
+            alert('No hay preguntas disponibles para este grado');
+            return;
+        }
+
+        studentData.grado = selectedGrade;
         studentData.nombre = document.getElementById('student-name').value.trim();
         studentData.matricula = document.getElementById('student-matricula').value.trim();
         studentData.email = document.getElementById('student-email').value.trim();
         studentData.startTime = new Date();
 
+        console.log('Alumno identificado:', studentData);
+        console.log(`Banco de preguntas cargado: ${activeQuestionBank.length} preguntas para grado ${selectedGrade}°`);
+
         // Ocultar modal y cargar primera pregunta
         studentModal.classList.add('hidden');
         loadQuestion(currentQuestionIndex);
-
-        console.log('Alumno identificado:', studentData);
     });
 
     // Si hay progreso guardado, ocultar el modal de identificación
