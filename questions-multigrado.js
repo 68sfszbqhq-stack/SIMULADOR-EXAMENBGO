@@ -7,7 +7,7 @@ const questionBankMultiGrado = {
         // PROBABILIDAD Y ESTADÍSTICA I (5 preguntas)
         {
             id: 1,
-            grado: "2",
+            grado: "3",
             subject: "Probabilidad y Estadística I",
             subtema: "Permutaciones",
             question: "Un grupo de 6 amigos va a tomarse una foto en una fila. ¿De cuántas formas diferentes pueden colocarse?",
@@ -21,7 +21,7 @@ const questionBankMultiGrado = {
         },
         {
             id: 2,
-            grado: "2",
+            grado: "3",
             subject: "Probabilidad y Estadística I",
             subtema: "Permutaciones con orden",
             question: "En una competencia de atletismo con 8 corredores, ¿de cuántas maneras diferentes se pueden repartir las medallas de oro, plata y bronce?",
@@ -35,7 +35,7 @@ const questionBankMultiGrado = {
         },
         {
             id: 3,
-            grado: "2",
+            grado: "3",
             subject: "Probabilidad y Estadística I",
             subtema: "Media aritmética",
             question: "Las edades de un grupo de 5 amigos son: 12, 14, 15, 15 y 19 años. ¿Cuál es la media aritmética de sus edades?",
@@ -49,7 +49,7 @@ const questionBankMultiGrado = {
         },
         {
             id: 4,
-            grado: "2",
+            grado: "3",
             subject: "Probabilidad y Estadística I",
             subtema: "Moda",
             question: "En una tienda se registraron las ventas diarias de la semana: $100, $150, $100, $200, $150, $100, $250. ¿Cuál es la moda de las ventas?",
@@ -63,7 +63,7 @@ const questionBankMultiGrado = {
         },
         {
             id: 5,
-            grado: "2",
+            grado: "3",
             subject: "Probabilidad y Estadística I",
             subtema: "Mediana",
             question: "Las calificaciones de un estudiante en 7 exámenes son: 6, 7, 9, 5, 8, 10, 7. ¿Cuál es la mediana de estas calificaciones?",
