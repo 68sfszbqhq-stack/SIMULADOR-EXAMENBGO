@@ -264,10 +264,7 @@ async function finishQuiz() {
                     `${results.totalCorrect}/${results.totalQuestions} (${results.percentage}%)`;
                 document.getElementById('confirmation-modal').classList.remove('hidden');
 
-                // Ocultar después de 3 segundos
-                setTimeout(() => {
-                    document.getElementById('confirmation-modal').classList.add('hidden');
-                }, 3000);
+                // El usuario debe cerrar el modal manualmente haciendo clic en el botón "Cerrar"
             } else {
                 console.error('Error al enviar resultados:', firebaseResult.error);
                 alert('Tus resultados se guardaron localmente, pero no se pudieron enviar al servidor. Por favor, contacta al profesor.');
