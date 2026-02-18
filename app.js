@@ -20,10 +20,13 @@ let studentData = {
 // --- FUNCIONES DE PERSISTENCIA ---
 
 // Cargar datos guardados del localStorage
+// Cargar datos guardados del localStorage
 function loadSavedData() {
     const savedAnswers = localStorage.getItem('buap_exam_answers');
     const savedIndex = localStorage.getItem('buap_exam_current_index');
+    const savedStudentData = localStorage.getItem('buap_exam_student_data');
 
+    // 1. Restaurar Respuestas
     if (savedAnswers) {
         try {
             userAnswers = JSON.parse(savedAnswers);
@@ -34,10 +37,33 @@ function loadSavedData() {
         }
     }
 
+    // 2. Restaurar Datos del Alumno y Banco de Preguntas (GRADO)
+    if (savedStudentData) {
+        try {
+            const parsedData = JSON.parse(savedStudentData);
+            if (parsedData && parsedData.grado) {
+                studentData = parsedData;
+                selectedGrade = studentData.grado;
+                activeQuestionBank = getQuestionsByGrade(selectedGrade);
+                console.log(`Sesión restaurada: Grado ${selectedGrade}, ${activeQuestionBank.length} preguntas.`);
+            }
+        } catch (e) {
+            console.error('Error al cargar datos del alumno:', e);
+        }
+    }
+
+    // 3. Restaurar Índice (Validando con el banco cargado)
     if (savedIndex) {
         currentQuestionIndex = parseInt(savedIndex, 10);
-        if (isNaN(currentQuestionIndex) || currentQuestionIndex < 0 || currentQuestionIndex >= activeQuestionBank.length) {
-            currentQuestionIndex = 0;
+        // Si hay banco cargado, validar límites
+        if (activeQuestionBank.length > 0) {
+            if (isNaN(currentQuestionIndex) || currentQuestionIndex < 0 || currentQuestionIndex >= activeQuestionBank.length) {
+                console.warn('Índice guardado fuera de rango, reiniciando a 0');
+                currentQuestionIndex = 0;
+            }
+        } else {
+            // Si no hay banco, solo aseguramos que sea número
+            if (isNaN(currentQuestionIndex)) currentQuestionIndex = 0;
         }
     }
 }
@@ -47,6 +73,7 @@ function saveData() {
     try {
         localStorage.setItem('buap_exam_answers', JSON.stringify(userAnswers));
         localStorage.setItem('buap_exam_current_index', currentQuestionIndex.toString());
+        localStorage.setItem('buap_exam_student_data', JSON.stringify(studentData)); // Guardar datos del alumno (incluyendo grado)
     } catch (e) {
         console.error('Error al guardar en localStorage:', e);
     }
@@ -56,6 +83,7 @@ function saveData() {
 function clearSavedData() {
     localStorage.removeItem('buap_exam_answers');
     localStorage.removeItem('buap_exam_current_index');
+    localStorage.removeItem('buap_exam_student_data');
     console.log('Datos del examen eliminados');
 }
 
@@ -413,8 +441,10 @@ document.addEventListener('DOMContentLoaded', () => {
         loadQuestion(currentQuestionIndex);
     });
 
-    // Si hay progreso guardado, ocultar el modal de identificación
-    if (answeredCount > 0) {
+    // Si hay progreso guardado Y el banco de preguntas se cargó correctamente
+    // Si no hay banco (caso legacy o bug), dejamos el modal para que seleccione grado
+    if (answeredCount > 0 && activeQuestionBank.length > 0) {
+        console.log("Continuando examen con banco cargado.");
         studentModal.classList.add('hidden');
         loadQuestion(currentQuestionIndex);
     }
