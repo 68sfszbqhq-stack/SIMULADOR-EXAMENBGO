@@ -1310,6 +1310,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "Relaciona el modelo corpuscular con el tipo de materia. Modelo corpuscular Materia 1. a. Elemento 2. b. Ion 3. c. Compuesto d. Mezcla",
+            image: "assets/exam_images/1/page_8_image_1.png",
             options: {
                 A: "1a, 2b y 3d",
                 B: "1c, 2a y 3d",
@@ -1338,7 +1339,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "Relaciona los siguientes elementos químicos con la familia a la que pertenecen en la tabla periódica. Elemento Familia 1. Flúor (F) a. Gases nobles 2. Boro (B) b. Halógenos 3. Mercurio (Hg) c. Metal 4. Argón (Ar) d. Metaloide",
-            image: "assets/exam_images/1/page_8_image_1.png",
+            
             options: {
                 A: "1a, 2c, 3d y 4b",
                 B: "1b, 2c, 3d y 4a",
