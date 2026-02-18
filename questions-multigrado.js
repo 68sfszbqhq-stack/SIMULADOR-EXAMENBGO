@@ -1382,6 +1382,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "En la reacción de fotosíntesis intervienen los compuestos: dióxido de carbono (CO2) y agua (H2O), como producto se obtiene glucosa (C6H12O6) y oxígeno (O2). Dada la siguiente ecuación no balanceada: ¿Cuál es el número correcto de moléculas de oxígeno (CO₂), de agua (H₂O) y de oxígeno (O₂) que se necesitan para balancear esta ecuación?",
+            image: "assets/exam_images/1/page_10_image_1.png",
             options: {
                 A: "5 / 7 / 6",
                 B: "6 / 5 / 6",
