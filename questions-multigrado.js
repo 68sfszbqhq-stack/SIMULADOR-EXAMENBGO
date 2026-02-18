@@ -1199,8 +1199,10 @@ const questionBankMultiGrado = {
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "¿Cuál es la estructura de Lewis del cloro (17Cl) con la que se forma la molécula de ácido hipocloroso (HClO), empleado en la industria principalmente para la desinfección de agua para consumo humano?",
             options: {
-                A: "B.",
-                C: "D.",
+                A: '<img src="assets/exam_images/1/page_5_image_2.png" alt="Opción A" style="max-height: 150px; display: block; margin: 0 auto;">',
+                B: '<img src="assets/exam_images/1/page_5_image_3.png" alt="Opción B" style="max-height: 150px; display: block; margin: 0 auto;">',
+                C: '<img src="assets/exam_images/1/page_5_image_4.png" alt="Opción C" style="max-height: 150px; display: block; margin: 0 auto;">',
+                D: '<img src="assets/exam_images/1/page_5_image_5.png" alt="Opción D" style="max-height: 150px; display: block; margin: 0 auto;">',
             },
             correct: "D"
         },
@@ -2349,6 +2351,7 @@ const questionBankMultiGrado = {
             subject: "LENGUAJE",
             subtema: "LENGUAJE",
             question: "¿Qué función cumple la imagen dentro del texto?",
+            image: "assets/exam_images/1/page_39_image_1.png",
             options: {
                 A: "(2019, julio 27). Un Aleph propio por compañía. Ediciones EL PAÍS S.L.",
                 B: "Completar",
@@ -2506,6 +2509,7 @@ const questionBankMultiGrado = {
             subject: "LENGUAJE",
             subtema: "LENGUAJE",
             question: "La voluntad anticipada permite a las personas manifestar su deseo a no ser sometida a ciertos procedimientos médicos que alarguen el padecimiento. ¿Cuál es una postura contraria a la voluntad anticipada?",
+            image: "assets/exam_images/1/page_46_image_1.png",
             options: {
                 A: "Se reconocería como un derecho que no se le debería negar a alguien.",
                 B: "Ayudaría a que el Estado tuviera un sistema de salud organizado.",

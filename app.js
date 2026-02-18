@@ -129,10 +129,10 @@ function loadQuestion(index) {
         domQuestionImage.classList.add('hidden');
     }
 
-    domTextOptionA.textContent = questionData.options.A;
-    domTextOptionB.textContent = questionData.options.B;
-    domTextOptionC.textContent = questionData.options.C;
-    domTextOptionD.textContent = questionData.options.D;
+    domTextOptionA.innerHTML = questionData.options.A;
+    domTextOptionB.innerHTML = questionData.options.B;
+    domTextOptionC.innerHTML = questionData.options.C;
+    domTextOptionD.innerHTML = questionData.options.D;
 
     inputsOptions.forEach(input => input.checked = false);
 
