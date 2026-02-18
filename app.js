@@ -63,6 +63,7 @@ function clearSavedData() {
 const domQuestionText = document.getElementById('question-text');
 const domQuestionSubject = document.getElementById('question-subject');
 const domQuestionProgress = document.getElementById('question-progress');
+const domQuestionImage = document.getElementById('question-image');
 
 const domTextOptionA = document.getElementById('text-option-A');
 const domTextOptionB = document.getElementById('text-option-B');
@@ -90,6 +91,15 @@ function loadQuestion(index) {
     domQuestionText.textContent = questionData.question;
     domQuestionSubject.textContent = `${questionData.subject}${questionData.subtema ? ' - ' + questionData.subtema : ''}`;
     domQuestionProgress.textContent = `Pregunta ${index + 1} de ${activeQuestionBank.length}`;
+
+    // Manejo de Imágenes
+    if (questionData.image) {
+        domQuestionImage.src = questionData.image;
+        domQuestionImage.classList.remove('hidden');
+    } else {
+        domQuestionImage.src = '';
+        domQuestionImage.classList.add('hidden');
+    }
 
     domTextOptionA.textContent = questionData.options.A;
     domTextOptionB.textContent = questionData.options.B;

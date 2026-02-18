@@ -1,3 +1,4 @@
+
 # Python
 *.py
 __pycache__/
@@ -12,3 +13,11 @@ __pycache__/
 
 # Logs
 *.log
+
+# Dependencies
+node_modules/
+
+# Temporary files
+*.txt
+*.csv
+*.json
