@@ -1146,7 +1146,7 @@ const questionBankMultiGrado = {
                 C: "Agua (H2O)",
                 D: "Dióxido de carbono (CO2)",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 2,
@@ -1160,7 +1160,7 @@ const questionBankMultiGrado = {
                 C: "Elasticidad",
                 D: "Temperatura",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 3,
@@ -1174,7 +1174,7 @@ const questionBankMultiGrado = {
                 C: "VIIA (17)",
                 D: "VIIIA (18)",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 4,
@@ -1189,7 +1189,7 @@ const questionBankMultiGrado = {
                 C: "8",
                 D: "2",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 5,
@@ -1201,7 +1201,7 @@ const questionBankMultiGrado = {
                 A: "B.",
                 C: "D.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 6,
@@ -1215,7 +1215,7 @@ const questionBankMultiGrado = {
                 C: "2 / 2",
                 D: "1 / 1 Cl",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 7,
@@ -1229,7 +1229,7 @@ const questionBankMultiGrado = {
                 C: "1d, 2a, 3c, 4e y 5b",
                 D: "1d, 2b, 3e, 4c y 5a",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 8,
@@ -1243,7 +1243,7 @@ const questionBankMultiGrado = {
                 C: "potencial / cinética",
                 D: "cinética / potencial",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 9,
@@ -1257,7 +1257,7 @@ const questionBankMultiGrado = {
                 C: "Acción - reacción",
                 D: "Conservación de la energía",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 10,
@@ -1271,7 +1271,7 @@ const questionBankMultiGrado = {
                 C: "2 y 3",
                 D: "2 y 4",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 11,
@@ -1285,7 +1285,7 @@ const questionBankMultiGrado = {
                 C: "Precipitación",
                 D: "Condensación",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 12,
@@ -1299,7 +1299,7 @@ const questionBankMultiGrado = {
                 C: "Los ciclones y huracanes provocados por el impacto de los fenómenos climáticos.",
                 D: "El derretimiento de los casquetes polares debido al aumento de la temperatura.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 13,
@@ -1313,7 +1313,7 @@ const questionBankMultiGrado = {
                 C: "1c, 2d y 3b",
                 D: "1d, 2a y 3c",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 14,
@@ -1327,7 +1327,7 @@ const questionBankMultiGrado = {
                 C: "Densidad",
                 D: "Solubilidad",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 15,
@@ -1342,7 +1342,7 @@ const questionBankMultiGrado = {
                 C: "1b, 2d, 3c y 4a",
                 D: "1c, 2a, 3b y 4d",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 16,
@@ -1356,7 +1356,7 @@ const questionBankMultiGrado = {
                 C: "12 protones, 11 electrones, 11 neutrones",
                 D: "12 protones, 12 electrones, 11 neutrones",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 17,
@@ -1371,7 +1371,7 @@ const questionBankMultiGrado = {
                 C: "6",
                 D: "8",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 18,
@@ -1385,7 +1385,7 @@ const questionBankMultiGrado = {
                 C: "6 / 6 / 6",
                 D: "7 / 6 / 6",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 19,
@@ -1399,7 +1399,7 @@ const questionBankMultiGrado = {
                 C: "Mareomotriz",
                 D: "Hidroeléctrica",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 20,
@@ -1413,7 +1413,7 @@ const questionBankMultiGrado = {
                 C: "se anula / se conserva",
                 D: "se conserva / se anula",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 21,
@@ -1428,7 +1428,7 @@ const questionBankMultiGrado = {
                 C: "diferentes y opuestas",
                 D: "equivalentes y paralelas",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 22,
@@ -1442,7 +1442,7 @@ const questionBankMultiGrado = {
                 C: "2 y 3",
                 D: "3 y 4",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 23,
@@ -1456,7 +1456,7 @@ const questionBankMultiGrado = {
                 C: "Oxígeno",
                 D: "Nitrógeno",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 24,
@@ -1470,7 +1470,7 @@ const questionBankMultiGrado = {
                 C: "La generación de basura electrónica",
                 D: "El uso de fertilizantes en actividades agrícolas",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 25,
@@ -1485,7 +1485,7 @@ const questionBankMultiGrado = {
                 C: "Un grupo de amigos se inscribió a un concurso de grafiti organizado por las autoridades municipales, los ganadores pintarán murales con su arte en las paredes del recinto cultural.",
                 D: "Un grupo de vecinos se ha organizado para realizar la fiesta patronal de su colonia, por lo que han decidido cerrar los principales accesos con el fin de celebrar con los demás. Observa la siguiente imagen de accesibilidad en el transporte y contesta la pregunta 26.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 26,
@@ -1499,7 +1499,7 @@ const questionBankMultiGrado = {
                 C: "Igualdad",
                 D: "Bienestar común",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 27,
@@ -1513,7 +1513,7 @@ const questionBankMultiGrado = {
                 C: "Ana le contó a Juan que estaba triste, él escuchó y comprendió su situación, así que trató de ponerse en su lugar para darle un consejo.",
                 D: "Marcos vio que a un hombre le habían robado sus pertenencias en la calle; sin embargo, prefirió no ayudar para no meterse en problemas.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 28,
@@ -1527,7 +1527,7 @@ const questionBankMultiGrado = {
                 C: "Los directivos eligen a las y los estudiantes con mayor promedio.",
                 D: "Se decide solo tomar en cuenta a las y los estudiantes de último año.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 29,
@@ -1541,7 +1541,7 @@ const questionBankMultiGrado = {
                 C: "Educativo",
                 D: "Económico",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 30,
@@ -1555,7 +1555,7 @@ const questionBankMultiGrado = {
                 C: "Asignar todas las tareas al que no quiere trabajar en equipo para que puedan terminar el proyecto a tiempo.",
                 D: "Generar un espacio de diálogo entre las y los compañeros para buscar una solución que beneficie a todas y todos.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 31,
@@ -1569,7 +1569,7 @@ const questionBankMultiGrado = {
                 C: "2, 3 y 4",
                 D: "3, 4 y 5 Lee el siguiente párrafo y contesta la pregunta 32. Redacción BBC mundo 5 de diciembre de 2014 Por segundo día consecutivo, miles de manifestantes se concentraron en las principales ciudades de Estados Unidos en repulsa por la decisión de no procesar a un policía de Nueva York por la muerte por estrangulamiento de Eric Garner, un hombre negro desarmado.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 32,
@@ -1583,7 +1583,7 @@ const questionBankMultiGrado = {
                 C: "Inmigración",
                 D: "Segregación",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 33,
@@ -1597,7 +1597,7 @@ const questionBankMultiGrado = {
                 C: "2 y 3",
                 D: "3 y 4",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 34,
@@ -1611,7 +1611,7 @@ const questionBankMultiGrado = {
                 C: "La comunidad se organiza y se apoyan entre ellos mismos.",
                 D: "Cada persona afectada busca cómo mejorar sus condiciones.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 35,
@@ -1625,7 +1625,7 @@ const questionBankMultiGrado = {
                 C: "Prevención de la violencia",
                 D: "Formación en valores éticos",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 36,
@@ -1639,7 +1639,7 @@ const questionBankMultiGrado = {
                 C: "Sancionar a los estudiantes involucrados en las discusiones.",
                 D: "Separar a los estudiantes que discuten para evitar más conflictos.",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 37,
@@ -1652,7 +1652,7 @@ const questionBankMultiGrado = {
                 C: "2a − 1 6 c",
                 D: "1 2 a = 6c",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 38,
@@ -1666,7 +1666,7 @@ const questionBankMultiGrado = {
                 C: "$130",
                 D: "$140",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 39,
@@ -1680,7 +1680,7 @@ const questionBankMultiGrado = {
                 C: "5z",
                 D: "4z2 3z z",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 40,
@@ -1694,7 +1694,7 @@ const questionBankMultiGrado = {
                 C: "$9 600",
                 D: "$12 000",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 41,
@@ -1708,7 +1708,7 @@ const questionBankMultiGrado = {
                 C: "$3 333",
                 D: "$1 250",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 42,
@@ -1722,7 +1722,7 @@ const questionBankMultiGrado = {
                 C: "220 m",
                 D: "240 m 50 m 70 m 40 m 30 m",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 43,
@@ -1736,7 +1736,7 @@ const questionBankMultiGrado = {
                 C: "94 m2",
                 D: "112 m2",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 44,
@@ -1750,7 +1750,7 @@ const questionBankMultiGrado = {
                 C: "7",
                 D: "5 D A C B DA=8 CB=10 AB=14 DC=8",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 45,
@@ -1764,7 +1764,7 @@ const questionBankMultiGrado = {
                 C: "10",
                 D: "12",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 46,
@@ -1778,7 +1778,7 @@ const questionBankMultiGrado = {
                 C: "Adriana, rango de 5",
                 D: "Evans, rango de 5",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 47,
@@ -1792,7 +1792,7 @@ const questionBankMultiGrado = {
                 C: "1",
                 D: "9",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 48,
@@ -1806,7 +1806,7 @@ const questionBankMultiGrado = {
                 C: "2(p – 2)",
                 D: "2p – 2",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 49,
@@ -1820,7 +1820,7 @@ const questionBankMultiGrado = {
                 C: "99",
                 D: "116",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 50,
@@ -1834,7 +1834,7 @@ const questionBankMultiGrado = {
                 C: "A = 3x2 − x",
                 D: "A = (3x − 1)2 x 3x - 1",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 51,
@@ -1848,7 +1848,7 @@ const questionBankMultiGrado = {
                 C: "$161.25, $161.25, $322.50",
                 D: "$150.00, $225.00, $270.00",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 52,
@@ -1862,7 +1862,7 @@ const questionBankMultiGrado = {
                 C: "30%",
                 D: "37.5%",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 53,
@@ -1876,7 +1876,7 @@ const questionBankMultiGrado = {
                 C: "29.11 m",
                 D: "33.23 m",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 54,
@@ -1890,7 +1890,7 @@ const questionBankMultiGrado = {
                 C: "60",
                 D: "40 C E D A B BC=5.85 CD=5 DE=5	EA=7.21 AB=6.05 AD=4.12 Salida 8 m 2 m 2 m 4 m",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 55,
@@ -1905,7 +1905,7 @@ const questionBankMultiGrado = {
                 C: "Japón obtuvo menos medallas en esgrima que en bádminton.",
                 D: "Japón obtuvo más medallas en judo que en gimnasia artística.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 56,
@@ -1919,7 +1919,7 @@ const questionBankMultiGrado = {
                 C: "7.5",
                 D: "8",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 57,
@@ -1933,7 +1933,7 @@ const questionBankMultiGrado = {
                 C: "4°C",
                 D: "6°C",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 58,
@@ -1947,7 +1947,7 @@ const questionBankMultiGrado = {
                 C: "5",
                 D: "5",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 59,
@@ -1961,7 +1961,7 @@ const questionBankMultiGrado = {
                 C: "La especialización en el trabajo facilita la distribución de recursos, permitiendo así una mejor satisfacción de las necesidades básicas en nuestra sociedad.",
                 D: "La división del trabajo impulsa la productividad en ciertos sectores, aunque su implementación depende de las características y demandas específicas de cada sector económico.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 60,
@@ -1975,7 +1975,7 @@ const questionBankMultiGrado = {
                 C: "Proceso organizativo",
                 D: "Proceso de distribución",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 61,
@@ -1989,7 +1989,7 @@ const questionBankMultiGrado = {
                 C: "Aumento en la dependencia de recursos para el comercio",
                 D: "Deterioro de las condiciones laborales en los centros de trabajo",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 62,
@@ -2003,7 +2003,7 @@ const questionBankMultiGrado = {
                 C: "Estableciendo leyes y políticas públicas para bridar seguridad y reducir la posibilidad de conflictos entre diversos grupos sociales.",
                 D: "Promoviendo el respeto a las personas y exigiendo la participación ciudadana activa.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 63,
@@ -2017,7 +2017,7 @@ const questionBankMultiGrado = {
                 C: "2 y 4",
                 D: "3 y 4",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 64,
@@ -2031,7 +2031,7 @@ const questionBankMultiGrado = {
                 C: "Artistas locales, músicos tradicionales y escritores contemporáneos",
                 D: "Comunidades indígenas, afrodescendientes y grupos urbanos diversos",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 65,
@@ -2045,7 +2045,7 @@ const questionBankMultiGrado = {
                 C: "La diversidad cultural ha logrado crear políticas inclusivas que reconocen y respetan los derechos de todos los grupos sociales, promoviendo su participación en la vida política.",
                 D: "Las políticas públicas en México se enfocan exclusivamente en la homogeneización cultural, lo cual busca unificar las tradiciones de todos los grupos sociales en una sola identidad nacional.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 66,
@@ -2059,7 +2059,7 @@ const questionBankMultiGrado = {
                 C: "2, 3, 5 y 6",
                 D: "2, 4, 5 y 7",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 67,
@@ -2073,7 +2073,7 @@ const questionBankMultiGrado = {
                 C: "Uso de controles de precios y salarios como medidas para combatir la inflación y proteger el poder adquisitivo.",
                 D: "Fomento de la inversión pública en infraestructura para estimular el crecimiento económico inmediato del país.",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 68,
@@ -2087,7 +2087,7 @@ const questionBankMultiGrado = {
                 C: "Mantienen una política propia sin ninguna influencia externa desde su independencia.",
                 D: "Se justifican como una forma de promover la estabilidad, pero han provocado desconfianza entre la población.",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 69,
@@ -2101,7 +2101,7 @@ const questionBankMultiGrado = {
                 C: "Alimentación de una dieta específica",
                 D: "Alimentación con productos frescos y saludables",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 70,
@@ -2115,7 +2115,7 @@ const questionBankMultiGrado = {
                 C: "Los trabajadores realizan las tareas desde el inicio hasta el final del ensamble.",
                 D: "Los trabajadores cambian de tarea constantemente para experimentar todas las áreas de la producción.",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 71,
@@ -2129,7 +2129,7 @@ const questionBankMultiGrado = {
                 C: "Establecer nuevas plantas de tratamiento de residuos utilizando métodos avanzados.",
                 D: "Ampliar la capacidad de los vertederos existentes y crear nuevas áreas para almacenamiento.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 72,
@@ -2138,12 +2138,26 @@ const questionBankMultiGrado = {
             subtema: "RELACIONES Y PROCESOS SOCIALES",
             question: "Para que la democracia sea posible son necesarias las elecciones a través de las cuales la ciudadanía ejerce sus derechos y elige entre diversas propuestas políticas para formar el gobierno, integrar las diferentes representaciones y otorgar legitimidad al sistema político. De acuerdo con el ejercicio electoral del año 2024, en el que se eligió a la presidenta de la República Mexicana, ¿cómo se ejerce la democracia?",
             options: {
+                A: "Participación mediante el voto",
+                B: "Acudiendo a marchas partidistas",
+                C: "Participación en debates políticos",
+                D: "Escuchando las propuestas de campaña",
+            },
+            correct: "A"
+        },
+        {
+            id: 73,
+            grado: "1",
+            subject: "RELACIONES Y PROCESOS SOCIALES",
+            subtema: "RELACIONES Y PROCESOS SOCIALES",
+            question: "¿Qué papel desempeña la Comisión Nacional de los Derechos Humanos (CNDH) en México?",
+            options: {
                 A: "Tienen la autoridad para emitir sanciones legales y emitir sentencias penales.",
-                B: "Actúan como meros observadores, sin facultades para investigar violaciones",
-                C: "Se enfocan únicamente en la defensa de los derechos de grupos vulnerables,",
+                B: "Actúan como meros observadores, sin facultades para investigar violaciones a derechos humanos de manera efectiva.",
+                C: "Se enfocan únicamente en la defensa de los derechos de grupos vulnerables, excluyendo otros sectores de la sociedad.",
                 D: "Proporcionan un marco de cooperación entre el Estado y la sociedad civil en materia de derechos humanos, pero carecen de facultades legales para hacer cumplir recomendaciones.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 74,
@@ -2157,7 +2171,7 @@ const questionBankMultiGrado = {
                 C: "Lacandón",
                 D: "Tarahumara",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 75,
@@ -2171,7 +2185,7 @@ const questionBankMultiGrado = {
                 C: "2, 4 y 5",
                 D: "3, 5 y 6",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 76,
@@ -2185,7 +2199,7 @@ const questionBankMultiGrado = {
                 C: "Resultaron en un aumento de la deuda pública y en crisis económicas recurrentes que afectaron a la mayoría de la población.",
                 D: "Lograron una distribución equitativa de la riqueza, aunque no todas las clases sociales se beneficiaron por igual.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 77,
@@ -2199,7 +2213,7 @@ const questionBankMultiGrado = {
                 C: "Se centró en el desarrollo de la agricultura y la producción local, apoyando a los pequeños productores mediante subsidios.",
                 D: "Promovió la privatización de empresas estatales, la desregulación de mercados y una reducción en la intervención del Estado.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 78,
@@ -2213,7 +2227,7 @@ const questionBankMultiGrado = {
                 C: "McLane-Ocampo",
                 D: "Preliminares de la Soledad",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 79,
@@ -2227,7 +2241,7 @@ const questionBankMultiGrado = {
                 C: "Las personas se involucran en las campañas electorales.",
                 D: "El sistema de participación ciudadana propone una campaña.",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 80,
@@ -2241,7 +2255,7 @@ const questionBankMultiGrado = {
                 C: "Periódico municipal",
                 D: "Revistas regionales",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 81,
@@ -2255,7 +2269,7 @@ const questionBankMultiGrado = {
                 C: "1b, 2a y 3c",
                 D: "1b, 2c y 3a Lee el texto: “La leyenda de la flor de Cempasúchil” y responde la pregunta 82. Según la leyenda, Xóchitl y Huitzilin se enamoraron cuando eran niños, y acostumbraban a subir a la montaña dedicada a Tonatiuh, el dios azteca del sol para ofrecerle ramos de flores. Sin embargo, Huitzilin fue a pelear a la guerra para defender las tierras aztecas y murió. Por ello, Xóchitl pidió al dios Tonatiuh que la reuniera con su amado. El dios del sol decidió cumplir su deseo dejó caer sus rayos sobre Xóchitl, y ella se transformó en una flor de color amarillo, en la que un colibrí posó y ésta abrió sus 20 pétalos, liberando un aroma intenso. Así, se dice que el amor de la pareja azteca permanecerá mientras haya colibríes y flores de cempasúchil en los campos mexicanos. Por ello, la flor de cempasúchil forma parte de la cultura popular y del festejo del Día de Muertos. Espinosa, P. (2023, octubre 27). La leyenda de la flor de Cempasúchil. Revista Travesías | Inspiración Para Viajeros. https://www.travesiasdigital.com/noticias/leyenda-flor-cempasuchil/",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 82,
@@ -2269,7 +2283,7 @@ const questionBankMultiGrado = {
                 C: "El dios del Sol cumplió el deseo de Xóchitl y la convirtió en una flor de 20 pétalos para que pudiera reunirse con su amado quien murió en la guerra.",
                 D: "Una pareja de jóvenes aztecas, enamorados desde niños, se une en la muerte, él por ir a la guerra y ella convertida en flor de cempasúchil por el dios del Sol. Lee el siguiente texto y contesta la pregunta 83. \"—Allí está—murmuró el doctor. —Allí, al pie del muro, ha quedado como un perro. Me incliné para verle la cara: la piel gris, los ojos vidriosos y una espuma ligera en los labios. De repente sentí un calor extraño en las manos. Era su sangre. Él había muerto por defender sus ideas.\" \"El general en su laberinto\" Gabriel García Márquez.",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 83,
@@ -2283,7 +2297,7 @@ const questionBankMultiGrado = {
                 C: "Principal: El doctor se inclina para ver la cara del hombre muerto. Secundaria: El hombre tenía la piel gris y los ojos vidriosos.",
                 D: "Roosevelt) NUEVO Albert Einstein había recibido las investigaciones entonces recientes de E. Fermi y L. Szilard y había concluido que el uranio podía llegar a ser una fuente de energía nueva e importante en un futuro no muy lejano.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 84,
@@ -2297,7 +2311,7 @@ const questionBankMultiGrado = {
                 C: "Resumen",
                 D: "Relato Observa la imagen y la información complementaria para contestar la pregunta 85. a. Exploración de nuevos territorios b. Máquina de vapor c. Creación de herramientas de piedra d. Invención de la escritura",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 85,
@@ -2311,7 +2325,7 @@ const questionBankMultiGrado = {
                 C: "1c, 2d, 3a y 4b",
                 D: "1d, 2b, 3a y 4c",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 86,
@@ -2326,7 +2340,7 @@ const questionBankMultiGrado = {
                 C: "debido a / Además / Sin embargo",
                 D: "posterior a / De este modo / En este sentido Lee el siguiente texto, observa la imagen y responde la pregunta 87. ¿Qué es un eclipse lunar? Los eclipses lunares son fenómenos naturales que tienen como protagonistas al Sol, la Luna y la Tierra. Son espectáculos que atraen a miles de fanáticos de la astronomía que contemplan y graban estos fenómenos del universo. Los eclipses lunares son fenómenos en donde la sombra de la Tierra cubre a la Luna. Este fenómeno es una situación espacial en donde los tres astros, la Tierra, el Sol y la Luna se alinean en orden como se muestra en la imagen. De esta manera, la Tierra bloqueará los rayos solares provenientes de la estrella y se producirá una sombra en forma de cono que tapará por completo al satélite, en el caso que la alineación sea perfecta.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 87,
@@ -2340,7 +2354,7 @@ const questionBankMultiGrado = {
                 C: "Aclarar",
                 D: "Atraer Lee el siguiente fragmento y contesta la pregunta 88. UN ALEPH PROPIO POR COMPAÑÍA Jorge Luis Borges publicó en 1949 un corto libro de cuentos que tituló El Aleph. […] “Aclaró que un Aleph es uno de los puntos del espacio que contienen todos los puntos”. En él están todas las imágenes: “En la parte inferior del escalón, hacia la derecha, vi una pequeña esfera tornasolada, de casi intolerable fulgor. Al principio la creí giratoria; luego comprendí que ese movimiento era una ilusión producida por los vertiginosos espectáculos que encerraba. El diámetro del Aleph sería de dos o tres centímetros, pero el espacio cósmico estaba ahí”. Desde su publicación esta maravilla dio para muchas ensoñaciones. Lo que no era de suponer es que casi cada habitante del planeta acabara teniendo uno. En los noventa el teléfono móvil era un instrumento grande como un zapato, con una hora de autonomía, que servía para cruzar las palabras imprescindibles. Diez años después comenzó a disminuir hasta alcanzar el enanismo de caber, doblado, en la palma de la mano. […] En 10 años más ya casi poseía el tamaño original, hacía fotografías y vídeos, nos enseñaba las calles, nos despertaba, compraba y pagaba, hablaba; había sustituido al reloj y estaba constantemente encendido; multiplicaba también los enchufes que pudieran alimentarlo. […] Intuimos que las técnicas aparecen cuando se necesitan. La informática, justamente, sirve al desarrollo del Estado y su administración. Cuando fue preciso refinarla, porque el Estado se cargó de datos y deberes, ella creció. Digamos que empezó bien. Pero ¿a qué sirve este su despliegue en forma de Aleph? […] Es difícil saberlo. De momento instaura una burbuja alrededor de cada persona, sentada cada una junto a otra a la que no habla, pendiente de lo que la cajita enseña. Es un permiso de silencio. Como una marca del espacio privado de cada uno. Un principio externo de individuación. Fragmento adaptado de Valcárcel, https://elpais.com/elpais/2019/07/26/ideas/1564136597_136119.html",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 88,
@@ -2355,7 +2369,7 @@ const questionBankMultiGrado = {
                 C: "Sirve a la práctica del Estado y su administración.",
                 D: "En diez años ha desarrollado una vigorosa evolución. Lee el siguiente fragmento y contesta la pregunta 89. La mañana del jueves 19 de septiembre de 1985, mi padre nos despertó para ponernos a salvo ante la fuerte sacudida que azotaba la ciudad. A mis cinco años no entendía la magnitud de lo que estaba sucediendo, pero me sentía protegida junto a mis padres y mi hermano. Los que vivimos en carne propia el sismo del 85 obtuvimos la responsabilidad de enseñar a nuestros hijos a afrontar con valentía y prontitud las llamadas de atención que nos hace la naturaleza. […] Texto modificado con fines educativos. Cuaderno de competencias y lenguaje en comunicación. (2024). Edu.mx. Recuperado de http://www.cbtis33.edu.mx/alumno/formatosplanea/Volumen%202-%20LyC.pdf",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 89,
@@ -2369,7 +2383,7 @@ const questionBankMultiGrado = {
                 C: "opinión",
                 D: "hipótesis",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 90,
@@ -2383,7 +2397,7 @@ const questionBankMultiGrado = {
                 C: "Medina. (2023). Salud Mental Clínica. https://saludmentalclinica.org/12-argu- mentos-la-saludmental/estable.",
                 D: "Jorge Suárez. (2024). Fisioterapia Clínica.https://fisioterapiaclínica.org/27- argumentos-rehabilitacíón/física.",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 91,
@@ -2397,7 +2411,7 @@ const questionBankMultiGrado = {
                 C: "lírico / dramático / narrativo",
                 D: "dramático / narrativo / lírico Lee el siguiente poema y contesta la pregunta 92. En paz Amado Nervo Muy cerca de mi ocaso, yo te bendigo, vida, porque nunca me diste ni esperanza fallida, ni trabajos injustos, ni pena inmerecida; porque veo al final de mi rudo camino que yo fui el arquitecto de mi propio destino; que si extraje las mieles o la hiel de las cosas, fue porque en ellas puse hiel o mieles sabrosas: cuando planté rosales, coseché siempre rosas. …Cierto, a mis lozanías va a seguir el invierno: ¡mas tú no me dijiste que mayo fuese eterno! Hallé sin duda largas las noches de mis penas; mas no me prometiste tan sólo noches buenas; y en cambio tuve algunas santamente serenas… Amé, fui amado, el sol acarició mi faz. ¡Vida, nada me debes! ¡Vida, estamos en paz! Archiletras. (2022, septiembre 18). En paz, de Amado Nervo. Poemas sentidos. https://www.archiletras.com/poemassentidos/en-paz-de-amado-nervo/",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 92,
@@ -2411,7 +2425,7 @@ const questionBankMultiGrado = {
                 C: "Las injusticias de la vida",
                 D: "Agradecimiento a la vida Revisa la siguiente infografía y responde la pregunta 93. Ajolote (Infografía)- Ciencia UNAM. (2022, enero 11). Agua.org.mx. https://agua.org.mx/biblioteca/ajolote- infografia-ciencia-unam/",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 93,
@@ -2425,7 +2439,7 @@ const questionBankMultiGrado = {
                 C: "El ajolote es el actor principal de la ciencia y ha sido protagonista de leyendas prehispánicas.",
                 D: "Los ajolotes respiran de tres formas distintas: por los pulmones, las branquias y la piel. Lee el siguiente texto y contesta la pregunta 94. Clara quedó muda tras la muerte de su hermana Rosa, la Bella. No habló durante años, mientras su madre intentaba todo lo posible para devolverle la voz. La tragedia familiar marcó a Clara, quien, a pesar de su silencio, desarrolló una capacidad inusual para comunicarse de otras maneras. Mientras tanto, el resto de la familia luchaba por mantener el orden en la casa, enfrentando las dificultades que surgían tras la muerte de Rosa. Fragmento de “La casa de los espíritus” de Isabel Allende.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 94,
@@ -2440,7 +2454,7 @@ const questionBankMultiGrado = {
                 C: "La familia de Clara vivió en paz hasta que la muerte de Rosa trajo una serie de dificultades, especialmente para Clara, quien dejó de hablar.",
                 D: "Clara se afectó mucho por la muerte de su hermana y sus padres enfrentaron muchas dificultades para seguir adelante con sus vidas.",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 95,
@@ -2454,7 +2468,7 @@ const questionBankMultiGrado = {
                 C: "1be, 2cf y 3ad",
                 D: "1cf, 2ab y 3de Lee el siguiente texto y contesta la pregunta 96. Hemos paseado, leído, descansado, comido y bebido, en resumen, pasamos unas vacaciones extraordinarias, por lo que deberíamos preparar las cosas para volver a casa previniendo los posibles contratiempos, como sucedió la vez anterior cuando se pinchó una llanta del automóvil, tuvimos que hablarle al seguro, esperamos por aproximadamente tres horas y finalmente fuimos rescatados y llevados hasta nuestra casa por la policía.",
             },
-            correct: null
+            correct: "B"
         },
         {
             id: 96,
@@ -2468,7 +2482,7 @@ const questionBankMultiGrado = {
                 C: "por lo que",
                 D: "cuando Géneros literarios 1. Lírico 2. Dramático 3. Didáctico Lee la siguiente infografía y contesta la pregunta 97. El Fentanilo TE MATA. (2023, abril 26). CETis 160. https://cetis160.edu.mx/el-fentanilo-te-mata/",
             },
-            correct: null
+            correct: "A"
         },
         {
             id: 97,
@@ -2483,7 +2497,7 @@ const questionBankMultiGrado = {
                 C: "El impacto negativo del consumo del fentanilo",
                 D: "Brindar una orientación sobre como mezclar el fentanilo",
             },
-            correct: null
+            correct: "C"
         },
         {
             id: 98,
@@ -2497,7 +2511,7 @@ const questionBankMultiGrado = {
                 C: "Evitaría gastos al Estado y a la familia de quién decida hacerlo.",
                 D: "Se impondría a todos los enfermos vulnerables. Lee el siguiente fragmento y contesta la pregunta 99. Legalización de sustancias nocivas en México: ¿solución o trampa? El tema de la legalización de sustancias nocivas ha sido uno de gran peso en el debate público en numerosos países del mundo. Este tema, como muchos otros, es controversial, ya que representa un choque entre valores y filosofías de vida. Sin embargo, en el caso mexicano, este tema posee otra capa de complejidad, ya que el tema de narcotráfico es sumamente relevante en el país y la acción de legalizar o prohibir ciertas drogas afecta directamente este fenómeno. Por su parte, un partidario de la prohibición de la venta de estas sustancias puede argumentar que legalizar las drogas resulta en un problema colectivo. Si muchas personas consumen estas sustancias que alteran el funcionamiento regular del organismo, toda la sociedad pagaría las consecuencias de su libre consumo: habría más accidentes de tráfico porque éstas distorsionan las percepciones sensoriales; se cometerían más crímenes porque las drogas reducen las inhibiciones, y los hospitales estarían más presionados tratando las sobredosis. Modificado con fines educativos. Legalización de sustancias nocivas en México: ¿solución o trampa? (s/f). Gob.mx. Recuperado el 6 de enero de 2025, de https://comunicacionsocial.diputados.gob.mx/revista/index.php/pluralidad/legalizacion-de-sustancias-nocivas- en-mexico-solucion-o-trampa-",
             },
-            correct: null
+            correct: "D"
         },
         {
             id: 99,
@@ -2511,7 +2525,7 @@ const questionBankMultiGrado = {
                 C: "Teorías",
                 D: "Datos Fin del examen",
             },
-            correct: null
+            correct: "A"
         }
     ]
 };
