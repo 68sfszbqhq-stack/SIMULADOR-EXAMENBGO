@@ -10,6 +10,10 @@
     <!-- Firebase CDN -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- jsPDF & AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
@@ -50,6 +54,7 @@
             <select id="filter-date">
                 <option value="">Todas las fechas</option>
             </select>
+            <button onclick="exportToPDF()" class="btn btn-export-pdf">📄 Exportar PDF</button>
             <button onclick="exportToCSV()" class="btn btn-export">📥 Exportar CSV</button>
             <button onclick="loadResults()" class="btn btn-refresh">🔄 Actualizar</button>
         </section>

@@ -149,6 +149,136 @@ function exportToCSV() {
     console.log('Macro CSV exportado vía Data URI: ' + fileName);
 }
 
+// Exportar a PDF detallado por Grado y Materia
+function exportToPDF() {
+    if (filteredResults.length === 0) {
+        alert('No hay resultados para exportar');
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Título del Reporte
+    doc.setFontSize(18);
+    doc.setTextColor(0, 59, 92); // Azul BUAP
+    doc.text('Reporte General de Resultados - Simulador BUAP', 14, 20);
+
+    doc.setFontSize(10);
+    doc.setTextColor(100);
+    const fechaReporte = new Date().toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    doc.text(`Generado: ${fechaReporte}`, 14, 26);
+
+    // Agrupar resultados por Grado
+    const resultadosPorGrado = {};
+
+    // Identificar todas las materias posibles por grado
+    const materiasPorGrado = {};
+
+    filteredResults.forEach(result => {
+        const grado = result.alumno.grado || 'Sin Grado';
+
+        if (!resultadosPorGrado[grado]) {
+            resultadosPorGrado[grado] = [];
+            materiasPorGrado[grado] = new Set();
+        }
+
+        resultadosPorGrado[grado].push(result);
+
+        // Recolectar nombres de materias de este examen
+        if (result.resultados && result.resultados.porMateria) {
+            Object.keys(result.resultados.porMateria).forEach(materia => {
+                materiasPorGrado[grado].add(materia);
+            });
+        }
+    });
+
+    let startY = 35;
+
+    // Iterar por cada Grado encontrado
+    Object.keys(resultadosPorGrado).sort().forEach((grado, index) => {
+        const alumnos = resultadosPorGrado[grado];
+        const materias = Array.from(materiasPorGrado[grado]).sort(); // Columnas de materias
+
+        // Si no es la primera tabla, añadir nueva página
+        if (index > 0) {
+            doc.addPage();
+            startY = 20;
+        }
+
+        doc.setFontSize(14);
+        doc.setTextColor(0, 59, 92);
+        doc.text(`Resultados ${grado === '2' ? '2° Año' : grado === '3' ? '3° Año' : grado}`, 14, startY);
+
+        // Definir columnas de la tabla
+        // Nombre | ...Materias... | Promedio Final
+        let columns = [
+            { header: 'Alumno', dataKey: 'nombre' },
+            // Las materias se generarán dinámicamente
+        ];
+
+        materias.forEach(materia => {
+            // Abreviar nombres largos de materias para que quepan
+            let headerName = materia;
+            if (materia.includes('Pensamiento Matemático')) headerName = 'Matemáticas';
+            if (materia.includes('Lengua y Comunicación')) headerName = 'Lengua';
+            if (materia.includes('Probabilidad')) headerName = 'Probabilidad';
+            if (materia.includes('Cultura Digital')) headerName = 'Digital';
+            if (materia.includes('Conciencia Histórica')) headerName = 'Historia';
+            if (materia.includes('Salud Integral')) headerName = 'Salud';
+            if (materia.includes('Ecosistema')) headerName = 'Ecosistema';
+
+            columns.push({ header: headerName, dataKey: materia });
+        });
+
+        columns.push({ header: 'Final', dataKey: 'final' });
+
+        // Preparar columnas para autotable
+        // Necesitamos arrays de datos y arrays de headers
+        const tableColumns = columns.map(col => col.header);
+        const tableRows = alumnos.map(alumno => {
+            const row = [alumno.alumno.nombre];
+
+            materias.forEach(materia => {
+                if (alumno.resultados.porMateria && alumno.resultados.porMateria[materia]) {
+                    const datosMateria = alumno.resultados.porMateria[materia];
+                    const porcentaje = Math.round((datosMateria.aciertos / datosMateria.total) * 100);
+                    row.push(`${porcentaje}%`);
+                } else {
+                    row.push('-');
+                }
+            });
+
+            row.push(`${alumno.resultados.porcentaje}%`);
+            return row;
+        });
+
+        // Generar tabla
+        doc.autoTable({
+            startY: startY + 10,
+            head: [tableColumns],
+            body: tableRows,
+            theme: 'grid',
+            headStyles: {
+                fillColor: [0, 59, 92],
+                fontSize: 8,
+                halign: 'center'
+            },
+            bodyStyles: {
+                fontSize: 8,
+                halign: 'center'
+            },
+            columnStyles: {
+                0: { halign: 'left', cellWidth: 40 } // Nombre align left
+            },
+            styles: { overflow: 'linebreak' },
+        });
+    });
+
+    // Guardar PDF
+    doc.save(`Reporte_Resultados_Simulador_${new Date().toISOString().split('T')[0]}.pdf`);
+}
+
 // Cargar todos los resultados de Firebase
 async function loadResults() {
     try {

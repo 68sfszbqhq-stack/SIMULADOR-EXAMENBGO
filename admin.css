@@ -116,6 +116,16 @@ body {
     background-color: #218838;
 }
 
+.btn-export-pdf {
+    background-color: #dc3545;
+    /* Rojo para PDF */
+    color: white;
+}
+
+.btn-export-pdf:hover {
+    background-color: #c82333;
+}
+
 .btn-refresh {
     background-color: var(--buap-blue);
     color: white;
