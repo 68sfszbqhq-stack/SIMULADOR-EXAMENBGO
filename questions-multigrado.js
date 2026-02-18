@@ -1140,6 +1140,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "Es una representación de una molécula de:",
+            image: "assets/exam_images/1/page_4_image_1.png",
             options: {
                 A: "Ozono (O3)",
                 B: "Cloro (CI2)",
@@ -1182,7 +1183,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "La figura muestra la distribución electrónica del modelo atómico de Bohr de un elemento. Calcula el número de protones del elemento.",
-            image: "assets/exam_images/1/page_4_image_1.png",
+            image: "assets/exam_images/1/page_5_image_1.png",
             options: {
                 A: "18",
                 B: "10",
