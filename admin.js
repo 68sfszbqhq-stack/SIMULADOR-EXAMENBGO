@@ -3,11 +3,151 @@
 let allResults = [];
 let filteredResults = [];
 
+// Inicializar mapa de preguntas
+let questionsMap = new Map();
+
+function initQuestionMap() {
+    if (typeof questionBankMultiGrado === 'undefined') {
+        console.warn('Advertencia: questionBankMultiGrado no está definido. Asegúrate de cargar questions-multigrado.js antes de admin.js');
+        return;
+    }
+
+    // Recorrer ambos grados ('2' y '3') y cualquier otro que exista
+    Object.keys(questionBankMultiGrado).forEach(grado => {
+        questionBankMultiGrado[grado].forEach(q => {
+            questionsMap.set(q.id.toString(), {
+                ...q,
+                gradoDB: grado // Guardamos el grado del banco original
+            });
+        });
+    });
+    console.log(`Mapa de preguntas inicializado: ${questionsMap.size} preguntas encontradas.`);
+}
+
 // Cargar resultados al iniciar
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Panel de administración cargado');
+    initQuestionMap(); // Inicializar mapa de preguntas
     loadResults();
 });
+
+// ... resto del código ...
+
+// Exportar a CSV detallado
+function exportToCSV() {
+    if (filteredResults.length === 0) {
+        alert('No hay resultados para exportar');
+        return;
+    }
+
+    if (questionsMap.size === 0) {
+        initQuestionMap(); // Intentar inicializar de nuevo si estaba vacío
+        if (questionsMap.size === 0) {
+            alert('No se pudo cargar el banco de preguntas. La exportación detallada no incluirá textos de temas, solo respuestas.');
+        }
+    }
+
+    // Obtener todos los IDs de preguntas ordenados numéricamente
+    const allQuestionIds = Array.from(questionsMap.keys()).map(Number).sort((a, b) => a - b);
+
+    // --- CONSTRUCCIÓN DE ENCABEZADOS ---
+    // 1. Datos del Alumno
+    let headers = ['Grado', 'Nombre', 'Matrícula', 'Email', 'Fecha', 'Hora', 'Duración', 'Correctas', 'Total', 'Porcentaje'];
+
+    // 2. Bloque de RESPUESTAS (Letra elegida)
+    allQuestionIds.forEach(id => headers.push(`R_P${id}`)); // R = Respuesta
+
+    // 3. Bloque de PUNTAJES (1 o 0)
+    allQuestionIds.forEach(id => headers.push(`P_P${id}`)); // P = Puntos
+
+    // 4. Bloque de TEMAS (Opcional, al final para referencia)
+    allQuestionIds.forEach(id => headers.push(`T_P${id}`)); // T = Tema
+
+    let csv = headers.join(',') + '\n';
+
+    // --- CONSTRUCCIÓN DE FILAS ---
+    filteredResults.forEach(result => {
+        let row = [];
+
+        // 1. Datos del Alumno
+        row.push(`"${result.alumno.grado || ''}"`);
+        row.push(`"${(result.alumno.nombre || '').replace(/,/g, ' ')}"`);
+        row.push(`"${result.alumno.matricula || ''}"`);
+        row.push(`"${result.alumno.email || ''}"`);
+        row.push(`"${result.examen.fecha || ''}"`);
+        row.push(`"${result.examen.hora || ''}"`);
+        row.push(`"${result.examen.duracion || ''}"`);
+        row.push(result.resultados.totalCorrectas || 0);
+        row.push(result.resultados.totalPreguntas || 0);
+        row.push(`"${result.resultados.porcentaje}%"`);
+
+        // Preparar arrays para los bloques de datos
+        let answersBlock = [];
+        let scoresBlock = [];
+        let topicsBlock = [];
+
+        allQuestionIds.forEach(id => {
+            const strId = id.toString();
+            const questionData = questionsMap.get(strId);
+
+            let userResp = '';
+            let points = '';
+            let tema = '';
+
+            // Verificar si el alumno respondió esta pregunta
+            if (result.resultados.respuestas && result.resultados.respuestas[strId]) {
+                userResp = result.resultados.respuestas[strId];
+
+                if (questionData && questionData.correct) {
+                    points = (userResp === questionData.correct) ? '1' : '0';
+                    tema = questionData.subject || '';
+                } else {
+                    points = '?';
+                    tema = 'Desconocido';
+                }
+            } else {
+                // No respondida (vacío)
+            }
+
+            answersBlock.push(userResp);
+            scoresBlock.push(points);
+            topicsBlock.push(`"${tema.replace(/,/g, ' ')}"`); // Escapar comas en temas
+        });
+
+        // 2. Agregar Bloque RESPUESTAS
+        row = row.concat(answersBlock);
+
+        // 3. Agregar Bloque PUNTAJES
+        row = row.concat(scoresBlock);
+
+        // 4. Agregar Bloque TEMAS
+        row = row.concat(topicsBlock);
+
+        csv += row.join(',') + '\n';
+    });
+
+    // ESTRATEGIA ALTERNATIVA: Data URI
+    // Esto incrusta los datos directamente en el enlace, evitando problemas con Blob y URLs temporales
+    const universalBOM = "\uFEFF";
+    const uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(universalBOM + csv);
+
+    const link = document.createElement('a');
+
+    // Nombre del archivo con fecha y hora
+    const now = new Date();
+    const timestamp = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}${now.getMinutes().toString().padStart(2, '0')}`;
+    const fileName = `Macro_Resultados_Examen_${timestamp}.csv`;
+
+    link.setAttribute('href', uri);
+    link.setAttribute('download', fileName);
+    link.style.visibility = 'hidden';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    console.log('Macro CSV exportado vía Data URI: ' + fileName);
+}
 
 // Cargar todos los resultados de Firebase
 async function loadResults() {
@@ -241,44 +381,7 @@ function filterResults() {
     renderTable(filteredResults);
 }
 
-// Exportar a CSV
-function exportToCSV() {
-    if (filteredResults.length === 0) {
-        alert('No hay resultados para exportar');
-        return;
-    }
 
-    // Encabezados
-    let csv = 'Nombre,Matrícula,Email,Fecha,Hora,Duración,Correctas,Total,Porcentaje\n';
-
-    // Datos
-    filteredResults.forEach(result => {
-        csv += `"${result.alumno.nombre}",`;
-        csv += `"${result.alumno.matricula}",`;
-        csv += `"${result.alumno.email || ''}",`;
-        csv += `"${result.examen.fecha}",`;
-        csv += `"${result.examen.hora}",`;
-        csv += `"${result.examen.duracion || 'N/A'}",`;
-        csv += `${result.resultados.totalCorrectas},`;
-        csv += `${result.resultados.totalPreguntas},`;
-        csv += `${result.resultados.porcentaje}%\n`;
-    });
-
-    // Crear y descargar archivo
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-
-    link.setAttribute('href', url);
-    link.setAttribute('download', `resultados_buap_${new Date().toISOString().split('T')[0]}.csv`);
-    link.style.visibility = 'hidden';
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    console.log('CSV exportado exitosamente');
-}
 
 // Cerrar modal al hacer clic fuera
 document.getElementById('details-modal').addEventListener('click', (e) => {
