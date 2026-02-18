@@ -1482,8 +1482,7 @@ const questionBankMultiGrado = {
             subject: "MI CONSTRUCCIÓN PERSONAL EN LA COLECTIVIDAD",
             subtema: "MI CONSTRUCCIÓN PERSONAL EN LA COLECTIVIDAD",
             question: "¿Qué opción representa una situación de riesgo social en la comunidad?",
-            image: "assets/exam_images/1/page_11_image_1.png",
-            options: {
+                        options: {
                 A: "Carlos tiene una discapacidad auditiva y quiere estudiar la preparatoria, sin embargo, le han negado el acceso porque no cuentan con profesores que impartan clases en Lengua de Señas Mexicana.",
                 B: "Ana cuenta con una beca por parte del gobierno para realizar sus estudios de bachillerato ya que su familia no tiene los recursos para pagar los útiles escolares, uniforme y pasajes.",
                 C: "Un grupo de amigos se inscribió a un concurso de grafiti organizado por las autoridades municipales, los ganadores pintarán murales con su arte en las paredes del recinto cultural.",
@@ -1902,7 +1901,7 @@ const questionBankMultiGrado = {
             subject: "MATEMÁTICAS",
             subtema: "MATEMÁTICAS",
             question: "En los Juegos Olímpicos de 2024, Japón fue uno de los tres países que más medallas ganó (oro, plata y bronce) como se muestra en la siguiente tabla: 20 12 13 Atletismo 1 0 0 Bádminton 0 0 2 Breaking 1 0 0 Escalada deportiva 0 1 0 Esgrima 2 1 2 Gimnasia artística 3 0 1 Golf 0 0 1 Hípica 0 0 1 Judo 3 2 3 Lucha 8 1 2 Natación 0 1 0 Pentatlón moderno 0 1 0 Saltos 0 1 0 Skateboarding 2 2 0 Tenis de mesa 0 1 1 Vela 0 1 0 Medallero. (s/f). Olympics.com. Recuperado de https://olympics.com/es/paris-2024/medallas ¿Cuál de las siguientes afirmaciones es correcta?",
-            image: "assets/exam_images/1/page_24_image_1.png",
+            image: "assets/exam_images/1/page_13_image_1.png",
             options: {
                 A: "Japón obtuvo más medallas de plata que bronce.",
                 B: "Japón obtuvo más medallas de oro que de plata en el golf.",
