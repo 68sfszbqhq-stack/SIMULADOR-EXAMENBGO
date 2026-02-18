@@ -1425,6 +1425,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "La siguiente imagen representa la tercera ley de Newton, las personas no se moverán debido a que las fuerzas que aplican son: Imagen tomada de: https://media.baamboozle.com/uploads/images/160716/1637846254_9555.png",
+            image: "assets/exam_images/1/page_11_image_1.png",
                         options: {
                 A: "iguales y nulas",
                 B: "iguales y opuestas",
