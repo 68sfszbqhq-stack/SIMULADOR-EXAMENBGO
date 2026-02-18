@@ -305,6 +305,69 @@ function exportToPDF() {
         doc.setTextColor(0, 59, 92);
         doc.text(`Resultados ${grado === '2' ? '2° Año' : grado === '3' ? '3° Año' : grado}`, 14, startY);
 
+        // --- GRÁFICO RESUMEN EN PDF ---
+        // Calcular promedio de cada materia para este grupo
+        const promediosMateria = {};
+        materias.forEach(materia => {
+            let totalPercent = 0;
+            let count = 0;
+            alumnos.forEach(alumno => {
+                if (alumno.resultados.porMateria && alumno.resultados.porMateria[materia]) {
+                    const stats = alumno.resultados.porMateria[materia];
+                    totalPercent += (stats.aciertos / stats.total) * 100;
+                    count++;
+                }
+            });
+            promediosMateria[materia] = count > 0 ? (totalPercent / count) : 0;
+        });
+
+        // Dibujar gráfico de barras simple
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text('Promedio por Asignatura:', 14, startY + 7);
+
+        let barY = startY + 12;
+        const maxBarWidth = 100; // Ancho máximo de la barra en mm
+
+        materias.forEach(materia => {
+            const porcentaje = promediosMateria[materia];
+
+            // Nombre materia
+            let headerName = materia;
+            if (materia.includes('Pensamiento Matemático')) headerName = 'Matemáticas';
+            if (materia.includes('Lengua y Comunicación')) headerName = 'Lengua';
+            if (materia.includes('Probabilidad')) headerName = 'Probabilidad';
+            if (materia.includes('Cultura Digital')) headerName = 'Digital';
+            if (materia.includes('Conciencia Histórica')) headerName = 'Historia';
+            if (materia.includes('Salud Integral')) headerName = 'Salud';
+            if (materia.includes('Ecosistema')) headerName = 'Ecosistema';
+            if (materia.includes('Taller de Ciencias')) headerName = 'Ciencias';
+            if (materia.includes('Conserva frutas')) headerName = 'Conservas';
+            if (materia.includes('Transforma cereales')) headerName = 'Cereales';
+            if (materia.includes('Inglés')) headerName = 'Inglés';
+
+            doc.setFontSize(8);
+            doc.setTextColor(50);
+            doc.text(headerName, 14, barY + 3);
+
+            // Color de la barra
+            let r = 220, g = 53, b = 69; // Rojo
+            if (porcentaje >= 60) { r = 255; g = 193; b = 7; } // Amarillo
+            if (porcentaje >= 80) { r = 40; g = 167; b = 69; } // Verde
+
+            doc.setFillColor(r, g, b);
+            const barWidth = (porcentaje / 100) * maxBarWidth;
+            doc.rect(40, barY, barWidth, 4, 'F');
+
+            // Texto porcentaje
+            doc.text(`${porcentaje.toFixed(1)}%`, 42 + barWidth, barY + 3);
+
+            barY += 7; // Siguiente barra
+        });
+
+        startY = barY + 10; // Ajustar inicio de la tabla
+        // -----------------------------
+
         // Definir columnas de la tabla
         // Nombre | ...Materias... | Promedio Final
         let columns = [
@@ -322,6 +385,10 @@ function exportToPDF() {
             if (materia.includes('Conciencia Histórica')) headerName = 'Historia';
             if (materia.includes('Salud Integral')) headerName = 'Salud';
             if (materia.includes('Ecosistema')) headerName = 'Ecosistema';
+            if (materia.includes('Taller de Ciencias')) headerName = 'Ciencias';
+            if (materia.includes('Conserva frutas')) headerName = 'Conservas';
+            if (materia.includes('Transforma cereales')) headerName = 'Cereales';
+            if (materia.includes('Inglés')) headerName = 'Inglés';
 
             columns.push({ header: headerName, dataKey: materia });
         });
