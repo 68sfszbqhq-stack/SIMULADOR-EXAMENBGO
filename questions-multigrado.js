@@ -1368,8 +1368,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "De la siguiente estructura de Lewis calcula ¿cuántos electrones de valencia tiene cada carbono?",
-            image: "assets/exam_images/1/page_8_image_2.png",
-            options: {
+                        options: {
                 A: "2",
                 B: "4",
                 C: "6",
@@ -1425,8 +1424,7 @@ const questionBankMultiGrado = {
             subject: "CIENCIAS NATURALES Y EXPERIMENTALES",
             subtema: "CIENCIAS NATURALES Y EXPERIMENTALES",
             question: "La siguiente imagen representa la tercera ley de Newton, las personas no se moverán debido a que las fuerzas que aplican son: Imagen tomada de: https://media.baamboozle.com/uploads/images/160716/1637846254_9555.png",
-            image: "assets/exam_images/1/page_9_image_1.png",
-            options: {
+                        options: {
                 A: "iguales y nulas",
                 B: "iguales y opuestas",
                 C: "diferentes y opuestas",
