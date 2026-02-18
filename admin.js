@@ -3,6 +3,9 @@
 let allResults = [];
 let filteredResults = [];
 
+// Variable global para la instancia del gráfico
+let subjectsChartInstance = null;
+
 // Inicializar mapa de preguntas
 let questionsMap = new Map();
 
@@ -30,6 +33,98 @@ document.addEventListener('DOMContentLoaded', () => {
     initQuestionMap(); // Inicializar mapa de preguntas
     loadResults();
 });
+
+// Función para actualizar los gráficos
+function updateCharts(resultsSource) {
+    if (!resultsSource || resultsSource.length === 0) return;
+
+    const ctx = document.getElementById('subjectsChart').getContext('2d');
+
+    // Calcular promedios por materia
+    const subjectStats = {};
+
+    resultsSource.forEach(result => {
+        if (!result.resultados || !result.resultados.porMateria) return;
+
+        Object.entries(result.resultados.porMateria).forEach(([materia, stats]) => {
+            if (!subjectStats[materia]) {
+                subjectStats[materia] = { totalPercentage: 0, count: 0 };
+            }
+
+            // Calculamos el porcentaje de este examen individual
+            const percent = (stats.aciertos / stats.total) * 100;
+            subjectStats[materia].totalPercentage += percent;
+            subjectStats[materia].count += 1;
+        });
+    });
+
+    // Preparar datos para el gráfico
+    const labels = Object.keys(subjectStats);
+    const data = labels.map(materia => {
+        const stats = subjectStats[materia];
+        return (stats.totalPercentage / stats.count).toFixed(1);
+    });
+
+    // Colores dinámicos según desempeño
+    const backgroundColors = data.map(value => {
+        if (value >= 80) return 'rgba(40, 167, 69, 0.6)'; // Verde excelente
+        if (value >= 60) return 'rgba(255, 193, 7, 0.6)'; // Amarillo regular
+        return 'rgba(220, 53, 69, 0.6)'; // Rojo reprobado
+    });
+
+    const borderColors = data.map(value => {
+        if (value >= 80) return 'rgba(40, 167, 69, 1)';
+        if (value >= 60) return 'rgba(255, 193, 7, 1)';
+        return 'rgba(220, 53, 69, 1)';
+    });
+
+    // Destruir gráfico anterior si existe
+    if (subjectsChartInstance) {
+        subjectsChartInstance.destroy();
+    }
+
+    subjectsChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Promedio de Aciertos (%)',
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Porcentaje de Efectividad'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return `Promedio: ${context.raw}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    console.log('Gráfico actualizado con ' + labels.length + ' materias.');
+}
 
 // ... resto del código ...
 
@@ -289,6 +384,9 @@ async function loadResults() {
         // Actualizar estadísticas
         updateStatistics();
 
+        // Actualizar gráficos
+        updateCharts(results);
+
         // Renderizar tabla
         renderTable(filteredResults);
 
@@ -508,6 +606,7 @@ function filterResults() {
         return matchesSearch && matchesGrade && matchesDate;
     });
 
+    updateCharts(filteredResults);
     renderTable(filteredResults);
 }
 
