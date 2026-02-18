@@ -1570,7 +1570,7 @@ const questionBankMultiGrado = {
                 A: "1, 2 y 5",
                 B: "1, 4 y 5",
                 C: "2, 3 y 4",
-                D: "3, 4 y 5 Lee el siguiente párrafo y contesta la pregunta 32. Redacción BBC mundo 5 de diciembre de 2014 Por segundo día consecutivo, miles de manifestantes se concentraron en las principales ciudades de Estados Unidos en repulsa por la decisión de no procesar a un policía de Nueva York por la muerte por estrangulamiento de Eric Garner, un hombre negro desarmado.",
+                D: "3, 4 y 5",
             },
             correct: "D"
         },
@@ -1579,7 +1579,7 @@ const questionBankMultiGrado = {
             grado: "1",
             subject: "MI CONSTRUCCIÓN PERSONAL EN LA COLECTIVIDAD",
             subtema: "MI CONSTRUCCIÓN PERSONAL EN LA COLECTIVIDAD",
-            question: "¿Qué situación social ejemplifica la nota periodística?",
+            question: "Lee el siguiente párrafo y contesta la pregunta 32.\n\nRedacción BBC mundo 5 de diciembre de 2014\nPor segundo día consecutivo, miles de manifestantes se concentraron en las principales ciudades de Estados Unidos en repulsa por la decisión de no procesar a un policía de Nueva York por la muerte por estrangulamiento de Eric Garner, un hombre negro desarmado.\n\n¿Qué situación social ejemplifica la nota periodística?",
             options: {
                 A: "Racismo",
                 B: "Genocidio",
