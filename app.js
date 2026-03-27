@@ -1,3 +1,6 @@
+// --- CONFIGURACIÓN GLOBAL ---
+const EXAMEN_CERRADO = true; // CAMBIAR A true PARA DESACTIVAR EL EXAMEN
+
 // --- ESTADO DE LA APLICACIÓN ---
 let currentQuestionIndex = 0;
 
@@ -406,6 +409,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Manejar el formulario de identificación del alumno
     const studentForm = document.getElementById('student-form');
     const studentModal = document.getElementById('student-modal');
+
+    // SI EL EXAMEN ESTÁ CERRADO, BLOQUEAR ACCESO
+    if (EXAMEN_CERRADO) {
+        if (studentModal) {
+            studentModal.innerHTML = `
+                <div class="modal-content" style="text-align: center; border-top: 5px solid #d14836;">
+                    <h2 style="color: #d14836;">🔒 EXAMEN CERRADO</h2>
+                    <p style="font-size: 1.1rem; margin: 20px 0;">El periodo de evaluación ha concluido. <br> Ya no se aceptan más respuestas.</p>
+                    <button onclick="window.location.href='index.html'" class="btn btn-primary">Volver al Inicio</button>
+                </div>
+            `;
+            studentModal.classList.remove('hidden');
+        }
+        return;
+    }
 
     studentForm.addEventListener('submit', (e) => {
         e.preventDefault();

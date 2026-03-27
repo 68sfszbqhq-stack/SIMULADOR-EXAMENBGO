@@ -59,31 +59,34 @@
 
     <header>
         <h1>🎓 Simulador de Examen - Bachillerato</h1>
-        <p>Selecciona el examen que deseas presentar</p>
+        <div style="background: #d14836; color: white; display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: 700; margin-bottom: 15px; font-size: 0.9rem;">
+            EXAMEN FINALIZADO - SISTEMA CERRADO 🔒
+        </div>
+        <p>El periodo de evaluación ha concluido. No se aceptan más respuestas.</p>
     </header>
 
     <div class="main-container" style="max-width: 900px; background: transparent; box-shadow: none; border: none;">
         
         <div class="exam-grid">
             <!-- Examen 1er Año -->
-            <a href="especiales.html?exam=cultura-digital-1" class="exam-card">
+            <div onclick="alert('⚠️ El periodo de examen ha finalizado. El sistema está CERRADO.')" class="exam-card" style="opacity: 0.8; cursor: not-allowed;">
                 <div>
                     <div class="exam-icon">📝</div>
                     <h3>Cultura Digital II</h3>
                     <p>1er Año (Primer Parcial)<br>Preguntas abiertas y sistema anti-trampa.</p>
                 </div>
-                <div class="btn-start">Comenzar Prueba</div>
-            </a>
+                <div class="btn-start" style="background: #999; cursor: not-allowed;">Examen Cerrado</div>
+            </div>
 
             <!-- Examen 2do Año -->
-            <a href="especiales.html?exam=cultura-digital-2" class="exam-card">
+            <div onclick="alert('⚠️ El periodo de examen ha finalizado. El sistema está CERRADO.')" class="exam-card" style="opacity: 0.8; cursor: not-allowed;">
                 <div>
                     <div class="exam-icon">🤖</div>
                     <h3>Taller Cultura Digital</h3>
                     <p>2do Año (IA y Tecnología)<br>Preguntas abiertas y sistema anti-trampa.</p>
                 </div>
-                <div class="btn-start">Comenzar Prueba</div>
-            </a>
+                <div class="btn-start" style="background: #999; cursor: not-allowed;">Examen Cerrado</div>
+            </div>
 
         </div>
 

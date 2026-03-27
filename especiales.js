@@ -51,6 +51,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function renderSelection() {
     const data = EXAM_DATA[currentExamType];
     examTitle.innerText = data.title;
+    const examSubtitle = document.getElementById('exam-subtitle');
+    if (data.isClosed) {
+        examSubtitle.innerText = '⚠️ El periodo de examen ha concluido. EXAMEN CERRADO.';
+        examSubtitle.style.color = '#d93025';
+        examSubtitle.style.fontWeight = 'bold';
+    }
     studentList.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Cargando lista de alumnos...</p>';
 
     // Fetch completed exams for this type
@@ -67,6 +73,18 @@ async function renderSelection() {
     }
 
     studentList.innerHTML = '';
+
+    if (data.isClosed) {
+        studentList.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #fff5f5; border: 2px solid #ffcdd2; border-radius: 12px; color: #d14836;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">🔒 EXAMEN CERRADO</h3>
+                <p>El periodo de entrega de este examen ha concluido. <br> Las respuestas ya no están disponibles para este grupo.</p>
+                <button onclick="window.location.href='index.html'" style="margin-top: 20px; padding: 10px 20px; background: #d14836; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 700;">Volver al Inicio</button>
+            </div>
+        `;
+        return;
+    }
+
     data.students.forEach(name => {
         const isDone = completedNames.has(name);
         const btn = document.createElement('button');
@@ -88,8 +106,12 @@ async function renderSelection() {
 }
 
 function startExam(name) {
-    currentStudent = name;
     const data = EXAM_DATA[currentExamType];
+    if (data.isClosed) {
+        alert('Este examen ha sido cerrado por el profesor.');
+        return;
+    }
+    currentStudent = name;
     
     // Shuffle questions
     questions = [...data.questions].sort(() => Math.random() - 0.5);

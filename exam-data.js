@@ -1,5 +1,6 @@
 const EXAM_DATA = {
     "cultura-digital-1": {
+        "isClosed": true,
         "title": "Examen 1er Parcial Cultura Digital II (1er Año)",
         "students": [
             "JIMENEZ LOPEZ VANESSA",
@@ -19,6 +20,7 @@ const EXAM_DATA = {
         "timerSeconds": 330 // 5m 30s
     },
     "cultura-digital-2": {
+        "isClosed": true,
         "title": "Examen Taller de Cultura Digital (2do Año)",
         "students": [
             "APONTE TLALCAZTECATL ZAYURI OMNALI",
