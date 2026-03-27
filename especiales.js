@@ -231,8 +231,17 @@ function setupAntiCheat() {
     // Detect Focus Loss (Capture prevention on mobile)
     window.addEventListener('blur', () => {
         if (currentStudent && finishedContainer.classList.contains('hidden')) {
-            addCheatLog('SALIDA FORZADA: Pérdida de foco detectada (posible captura o cambio de app).');
+            addCheatLog('CAPTURA O SALIDA DETECTADA: Se perdió el foco de la pantalla (posible captura en móvil o cambio de app).');
             finishExam();
+        }
+    });
+
+    // Mobile: viewport resize detection (sometimes triggered by screenshot overlay)
+    window.addEventListener('resize', () => {
+        if (currentStudent && finishedContainer.classList.contains('hidden')) {
+            // Only log if it's a significant height change usually not from keyboard
+            // but for safety, we'll just log it
+            addCheatLog('AVISO: Cambio de tamaño de ventana detectado.');
         }
     });
 
