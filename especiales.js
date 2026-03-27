@@ -177,10 +177,12 @@ btnFinishTime.onclick = () => {
 };
 
 async function finishExam() {
-    clearInterval(timerInterval);
-    examContainer.classList.add('hidden');
-    
-    // Show loading or something if needed
+    if (!examContainer.classList.contains('hidden')) {
+        clearInterval(timerInterval);
+        examContainer.classList.add('hidden');
+        
+        // Show submitting message
+        studentActiveName.innerText = "Enviando examen...";
     
     // Submit to Firestore
     const resultData = {
@@ -197,10 +199,10 @@ async function finishExam() {
     try {
         await db.collection('examenes_especiales').add(resultData);
         finishedContainer.classList.remove('hidden');
-    } catch (error) {
-        console.error("Error saving exam:", error);
-        alert("Hubo un error al enviar tus resultados. Por favor, contacta al profesor.");
-        // Try to print or save locally?
+        } catch (error) {
+            console.error("Error saving exam:", error);
+            alert("Hubo un error al enviar tus resultados. Por favor, contacta al profesor.");
+        }
     }
 }
 
@@ -218,28 +220,37 @@ function setupAntiCheat() {
         addCheatLog('Intento de copiar texto');
     });
 
-    // Detect Tab Switch
+    // Detect Tab Switch / Exit -> AUTO SUBMIT
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden && currentStudent) {
-            addCheatLog('Salida del navegador/pestaña detectada');
+        if (document.hidden && currentStudent && !finishedContainer.classList.contains('hidden')) {
+            addCheatLog('SALIDA FORZADA: El alumno salió del navegador/pestaña. Examen cerrado automáticamente.');
+            finishExam(); // Auto submit
         }
     });
 
-    // Detect Screenshot Keys
+    // Detect Focus Loss (Capture prevention on mobile)
+    window.addEventListener('blur', () => {
+        if (currentStudent && !finishedContainer.classList.contains('hidden')) {
+            addCheatLog('SALIDA FORZADA: Pérdida de foco detectada (posible captura o cambio de app).');
+            finishExam();
+        }
+    });
+
+    // Detect Screenshot Keys (Desktop)
     document.addEventListener('keydown', e => {
-        // Block Ctrl+C, Ctrl+V, PrintScreen
         if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'v')) {
             e.preventDefault();
             addCheatLog(`Intento de usar atajo de teclado: ${e.key}`);
         }
         
         if (e.key === 'PrintScreen') {
-            addCheatLog('Tecla PrintScreen detectada');
+            addCheatLog('TECLA PRINTSCREEN: Intento de captura.');
+            finishExam(); // Extreme measure as requested
         }
 
-        // Detect macOS screenshot (Shift+Cmd+3/4)
         if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.key === '5')) {
-            addCheatLog('Atajo de captura de pantalla detectado (macOS)');
+            addCheatLog('CAPTURA DETECTADA (Mac): Cerrando examen.');
+            finishExam();
         }
     });
 
