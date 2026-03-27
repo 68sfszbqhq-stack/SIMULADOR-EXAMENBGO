@@ -127,7 +127,7 @@
                 };
 
                 snapshot.forEach(doc => {
-                    const data = doc.data();
+                    const data = { id: doc.id, ...doc.data() };
                     if (groups[data.examen]) {
                         groups[data.examen].results.push(data);
                     }
@@ -152,6 +152,7 @@
                                         <span style="margin-left: 15px; color: #666;">📅 ${res.fecha} | 🕒 ${res.hora}</span>
                                     </div>
                                     ${hasIncidents ? `<span class="incident-badge">⚠️ ${res.incidentes.length} Incidentes</span>` : '<span style="color: var(--success); font-weight: 700;">✅ Sin incidentes</span>'}
+                                    <button onclick="deleteResult('${res.id}')" style="background:none; border:none; color:#d32f2f; cursor:pointer; font-size:0.8rem; margin-left:10px; font-weight:bold;">🗑️ Borrar</button>
                                 </div>
                                 <div class="qa-container">
                                     ${res.respuestas.map((qa, i) => `
@@ -184,6 +185,19 @@
             } catch (error) {
                 console.error("Error loading results:", error);
                 container.innerHTML = '<p style="text-align: center; color: red;">Error al cargar datos de Firebase.</p>';
+            }
+        }
+
+        async function deleteResult(id) {
+            if (confirm('¿Estás seguro de que deseas borrar permanentemente este intento de examen? El alumno podrá volver a realizarlo.')) {
+                try {
+                    await db.collection('examenes_especiales').doc(id).delete();
+                    alert('Intento borrado exitosamente.');
+                    loadResults(); // Reload
+                } catch (error) {
+                    console.error("Error deleting document:", error);
+                    alert('Error al intentar borrar el registro.');
+                }
             }
         }
 

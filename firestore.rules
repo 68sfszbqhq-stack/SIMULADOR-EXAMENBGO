@@ -24,8 +24,7 @@ service cloud.firestore {
     }
     // ── Exámenes Especiales (Cultura Digital) ──────────
     match /examenes_especiales/{docId} {
-      allow read: if true;
-      allow write: if true;
+      allow read, write, delete: if true;
     }
 
   }
