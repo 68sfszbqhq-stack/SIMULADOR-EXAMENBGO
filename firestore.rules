@@ -22,6 +22,11 @@ service cloud.firestore {
       // Borrado permitido (para el flujo de desbloqueo desde la app)
       allow delete: if true;
     }
+    // ── Exámenes Especiales (Cultura Digital) ──────────
+    match /examenes_especiales/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
 
   }
 }
