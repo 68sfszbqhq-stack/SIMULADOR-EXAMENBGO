@@ -26,7 +26,7 @@ const btnExtendTime = document.getElementById('btn-extend-time');
 const btnFinishTime = document.getElementById('btn-finish-time');
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     currentExamType = urlParams.get('exam');
 
@@ -36,20 +36,45 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    renderSelection();
+    await renderSelection();
     setupAntiCheat();
 });
 
-function renderSelection() {
+async function renderSelection() {
     const data = EXAM_DATA[currentExamType];
     examTitle.innerText = data.title;
-    studentList.innerHTML = '';
+    studentList.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Cargando lista de alumnos...</p>';
 
+    // Fetch completed exams for this type
+    let completedNames = new Set();
+    try {
+        const snapshot = await db.collection('examenes_especiales')
+            .where('examen', '==', currentExamType)
+            .get();
+        snapshot.forEach(doc => {
+            completedNames.add(doc.data().alumno);
+        });
+    } catch (error) {
+        console.error("Error fetching completed exams:", error);
+    }
+
+    studentList.innerHTML = '';
     data.students.forEach(name => {
+        const isDone = completedNames.has(name);
         const btn = document.createElement('button');
-        btn.className = 'btn-student';
-        btn.innerText = name;
-        btn.onclick = () => startExam(name);
+        btn.className = `btn-student ${isDone ? 'done' : ''}`;
+        btn.innerText = name + (isDone ? ' (REALIZADO ✅)' : '');
+        
+        if (isDone) {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+            btn.style.borderColor = 'var(--success)';
+            btn.style.color = 'var(--success)';
+        } else {
+            btn.onclick = () => startExam(name);
+        }
+        
         studentList.appendChild(btn);
     });
 }
