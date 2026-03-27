@@ -222,7 +222,7 @@ function setupAntiCheat() {
 
     // Detect Tab Switch / Exit -> AUTO SUBMIT
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden && currentStudent && !finishedContainer.classList.contains('hidden')) {
+        if (document.hidden && currentStudent && finishedContainer.classList.contains('hidden')) {
             addCheatLog('SALIDA FORZADA: El alumno salió del navegador/pestaña. Examen cerrado automáticamente.');
             finishExam(); // Auto submit
         }
@@ -230,7 +230,7 @@ function setupAntiCheat() {
 
     // Detect Focus Loss (Capture prevention on mobile)
     window.addEventListener('blur', () => {
-        if (currentStudent && !finishedContainer.classList.contains('hidden')) {
+        if (currentStudent && finishedContainer.classList.contains('hidden')) {
             addCheatLog('SALIDA FORZADA: Pérdida de foco detectada (posible captura o cambio de app).');
             finishExam();
         }
@@ -257,6 +257,15 @@ function setupAntiCheat() {
     // Block Drag/Drop
     document.addEventListener('dragstart', e => e.preventDefault());
     document.addEventListener('drop', e => e.preventDefault());
+
+    // BeforeUnload Warning
+    window.addEventListener('beforeunload', (e) => {
+        if (currentStudent && finishedContainer.classList.contains('hidden')) {
+            e.preventDefault();
+            e.returnValue = ''; // Show generic browser alert
+            addCheatLog('AVISO: El alumno intentó recargar la página.');
+        }
+    });
 }
 
 function addCheatLog(msg) {
