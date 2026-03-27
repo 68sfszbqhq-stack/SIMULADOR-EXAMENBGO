@@ -38,6 +38,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await renderSelection();
     setupAntiCheat();
+    
+    // Safety check: if focus is lost and they are in exam
+    setInterval(() => {
+        if (currentStudent && !document.hasFocus() && finishedContainer.classList.contains('hidden') && !examContainer.classList.contains('hidden')) {
+            addCheatLog('SALIDA FORZADA: El sistema detectó pérdida de foco persistente.');
+            finishExam();
+        }
+    }, 1000);
 });
 
 async function renderSelection() {
@@ -221,20 +229,17 @@ function setupAntiCheat() {
     });
 
     // Detect Tab Switch / Exit -> AUTO SUBMIT
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden && currentStudent && finishedContainer.classList.contains('hidden')) {
-            addCheatLog('SALIDA FORZADA: El alumno salió del navegador/pestaña. Examen cerrado automáticamente.');
+    const forceFinish = () => {
+        if (currentStudent && finishedContainer.classList.contains('hidden') && !examContainer.classList.contains('hidden')) {
+            addCheatLog('SALIDA FORZADA: El alumno salió del navegador o cambió de aplicación.');
             finishExam(); // Auto submit
         }
-    });
+    };
 
-    // Detect Focus Loss (Capture prevention on mobile)
-    window.addEventListener('blur', () => {
-        if (currentStudent && finishedContainer.classList.contains('hidden')) {
-            addCheatLog('CAPTURA O SALIDA DETECTADA: Se perdió el foco de la pantalla (posible captura en móvil o cambio de app).');
-            finishExam();
-        }
-    });
+    document.addEventListener('visibilitychange', forceFinish);
+    window.addEventListener('pagehide', forceFinish);
+    window.addEventListener('blur', forceFinish);
+    window.addEventListener('unload', forceFinish);
 
     // Mobile: viewport resize detection (sometimes triggered by screenshot overlay)
     window.addEventListener('resize', () => {
