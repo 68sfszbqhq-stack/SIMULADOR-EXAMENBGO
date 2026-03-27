@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hojas de Anotación – Quintana Roo Lluvia | 2da Olimpiada Estatal 2026</title>
+    <meta name="description"
+        content="Hojas de anotación para tiro con arco – Segunda Olimpiada Estatal 2026 Quintana Roo. Ronda de lluvia, tandas 4, 5 y 6.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script>
+        // ── Firebase init (mismo proyecto que el simulador)
+        const _fbConfig = {
+            apiKey: "AIzaSyBCdvgCo4XsFQryJVAa8rk7YUb4RxcdePA",
+            authDomain: "buap-exam-simulator.firebaseapp.com",
+            projectId: "buap-exam-simulator",
+            storageBucket: "buap-exam-simulator.firebasestorage.app",
+            messagingSenderId: "369867757222",
+            appId: "1:369867757222:web:e3913669faa1882d260667"
+        };
+        // Evitar doble inicialización si firebase-config.js ya lo hizo
+        if (!firebase.apps.length) firebase.initializeApp(_fbConfig);
+        const _db = firebase.firestore();
+        const COLECCION = 'anotaciones_qroo2026';
+    </script>
+
+    <style>
+        :root {
+            --qroo-blue: #003781;
+            --qroo-teal: #00b8c4;
+            --qroo-gold: #f5a623;
+            --qroo-red: #d0021b;
+            --bg-dark: #0a0e1a;
+            --bg-card: #111827;
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.10);
+            --text-main: #f0f4ff;
+            --text-muted: #8b9cbf;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --radius: 14px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse 80% 60% at 50% -20%, rgba(0, 55, 129, 0.45) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 90% 80%, rgba(0, 184, 196, 0.20) 0%, transparent 60%);
+        }
+
+        /* ── HEADER ─────────────────────────────── */
+        header {
+            background: linear-gradient(135deg, #003781 0%, #005ba1 50%, #00b8c4 100%);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='28' stroke='rgba(255,255,255,0.05)' stroke-width='1' fill='none'/%3E%3C/svg%3E") repeat;
+            opacity: .5;
+        }
+
+        .header-inner {
+            position: relative;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 28px 24px 22px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-icon {
+            font-size: 3.2rem;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .5));
+            flex-shrink: 0;
+        }
+
+        .header-text h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: .5px;
+            line-height: 1.15;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .4);
+        }
+
+        .header-text p {
+            font-size: .9rem;
+            opacity: .85;
+            margin-top: 4px;
+        }
+
+        .rain-badge {
+            margin-left: auto;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .3);
+            border-radius: 50px;
+            padding: 6px 16px;
+            font-size: .8rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── HERO INFO BAR ──────────────────────── */
+        .info-bar {
+            background: rgba(0, 184, 196, .12);
+            border-bottom: 1px solid rgba(0, 184, 196, .25);
+            padding: 10px 24px;
+        }
+
+        .info-bar-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: .82rem;
+            color: var(--text-muted);
+        }
+
+        .info-bar-inner span strong {
+            color: var(--qroo-teal);
+        }
+
+        /* ── MAIN ───────────────────────────────── */
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 28px 16px 60px;
+        }
+
+        /* ── SEARCH ─────────────────────────────── */
+        .search-section {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .search-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--qroo-teal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-box-wrap {
+            position: relative;
+        }
+
+        .search-box-wrap input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            background: rgba(255, 255, 255, .06);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .search-box-wrap input:focus {
+            border-color: var(--qroo-teal);
+            box-shadow: 0 0 0 3px rgba(0, 184, 196, .18);
+        }
+
+        .search-box-wrap input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        #archer-list {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 280px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--qroo-teal) transparent;
+        }
+
+        .archer-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .archer-item:hover {
+            background: rgba(0, 184, 196, .12);
+            border-color: rgba(0, 184, 196, .35);
+            transform: translateX(3px);
+        }
+
+        .archer-item.selected {
+            background: rgba(0, 184, 196, .20);
+            border-color: var(--qroo-teal);
+        }
+
+        .archer-diana {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            background: var(--qroo-blue);
+            border: 1px solid rgba(0, 184, 196, .5);
+            border-radius: 6px;
+            padding: 3px 9px;
+            min-width: 48px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .archer-name {
+            font-weight: 600;
+            font-size: .97rem;
+            flex: 1;
+        }
+
+        .archer-meta {
+            font-size: .78rem;
+            color: var(--text-muted);
+        }
+
+        .archer-club {
+            font-size: .76rem;
+            background: rgba(245, 166, 35, .15);
+            border: 1px solid rgba(245, 166, 35, .3);
+            border-radius: 20px;
+            padding: 2px 10px;
+            color: var(--qroo-gold);
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 20px;
+            font-size: .9rem;
+        }
+
+        /* ── SCORE SHEET ────────────────────────── */
+        .sheet-section {
+            display: none;
+        }
+
+        .sheet-section.visible {
+            display: block;
+        }
+
+        .sheet-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sheet-archer-card {
+            background: linear-gradient(135deg, rgba(0, 55, 129, .5) 0%, rgba(0, 184, 196, .2) 100%);
+            border: 1px solid rgba(0, 184, 196, .4);
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex: 1;
+        }
+
+        .archer-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--qroo-blue);
+            border: 2px solid var(--qroo-teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .archer-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .archer-info .meta {
+            font-size: .8rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .archer-info .meta span {
+            color: var(--qroo-teal);
+            font-weight: 600;
+        }
+
+        .btn-clear {
+            background: rgba(208, 2, 27, .15);
+            border: 1px solid rgba(208, 2, 27, .4);
+            color: #ff6b7a;
+            border-radius: 8px;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: .85rem;
+            font-weight: 600;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-clear:hover {
+            background: rgba(208, 2, 27, .28);
+            transform: scale(1.02);
+        }
+
+        /* END / TANDA TABLE */
+        .end-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: box-shadow .2s;
+        }
+
+        .end-card:focus-within {
+            box-shadow: 0 0 0 2px var(--qroo-teal), var(--shadow);
+        }
+
+        .end-card-header {
+            padding: 14px 20px;
+            background: linear-gradient(90deg, rgba(0, 55, 129, .6) 0%, rgba(0, 184, 196, .2) 100%);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .end-card-header h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+
+        .end-card-header .end-total-badge {
+            background: rgba(245, 166, 35, .18);
+            border: 1px solid var(--qroo-gold);
+            color: var(--qroo-gold);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-weight: 700;
+            font-size: .9rem;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: .5px;
+            min-width: 72px;
+            text-align: center;
+        }
+
+        .arrows-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr) 1fr 1fr;
+            gap: 0;
+        }
+
+        .arrows-row .col-label {
+            padding: 8px 6px;
+            text-align: center;
+            font-size: .72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, .03);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .arrows-row .col-label:nth-child(7),
+        .arrows-row .col-label:nth-child(8) {
+            background: rgba(0, 184, 196, .07);
+        }
+
+        .arrow-input {
+            padding: 12px 6px;
+            text-align: center;
+            position: relative;
+        }
+
+        .arrow-input input {
+            width: 100%;
+            max-width: 56px;
+            padding: 10px 4px;
+            background: rgba(255, 255, 255, .06);
+            border: 1.5px solid rgba(255, 255, 255, .10);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            text-align: center;
+            outline: none;
+            transition: all .18s;
+            -moz-appearance: textfield;
+        }
+
+        .arrow-input input::-webkit-outer-spin-button,
+        .arrow-input input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .arrow-input input:focus {
+            border-color: var(--qroo-teal);
+            background: rgba(0, 184, 196, .12);
+            box-shadow: 0 0 0 3px rgba(0, 184, 196, .18);
+        }
+
+        .arrow-input input.val-10 {
+            color: #ffd700;
+            border-color: rgba(255, 215, 0, .5);
+        }
+
+        .arrow-input input.val-x {
+            color: #ff6b35;
+            border-color: rgba(255, 107, 53, .5);
+        }
+
+        .arrow-input input.val-m {
+            color: #ff4d6d;
+        }
+
+        .arrow-input input.val-mid {
+            color: #00e5ff;
+        }
+
+        .subtotal-cell {
+            padding: 12px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subtotal-display {
+            background: rgba(0, 184, 196, .12);
+            border: 1px solid rgba(0, 184, 196, .3);
+            border-radius: 8px;
+            padding: 10px 8px;
+            width: 100%;
+            max-width: 64px;
+            text-align: center;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--qroo-teal);
+        }
+
+        .subtotal-display.xten {
+            background: rgba(245, 166, 35, .12);
+            border-color: rgba(245, 166, 35, .3);
+            color: var(--qroo-gold);
+        }
+
+        /* SUMMARY TABLE */
+        .summary-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 184, 196, .3);
+            border-radius: var(--radius);
+            margin-top: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 184, 196, .1);
+        }
+
+        .summary-title {
+            padding: 14px 20px;
+            background: linear-gradient(90deg, rgba(0, 184, 196, .25) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+            color: var(--qroo-teal);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .summary-item {
+            padding: 18px 12px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .summary-item:last-child {
+            border-right: none;
+        }
+
+        .summary-item .s-label {
+            font-size: .72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .summary-item .s-value {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .s-value.gold {
+            color: var(--qroo-gold);
+        }
+
+        .s-value.teal {
+            color: var(--qroo-teal);
+        }
+
+        .s-value.white {
+            color: #fff;
+        }
+
+        .s-value.blue {
+            color: #6eb3ff;
+        }
+
+        /* PRINT BUTTON */
+        .btn-print {
+            margin-top: 12px;
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, .08);
+            border: 1.5px solid rgba(255, 255, 255, .2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: .95rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            letter-spacing: .5px;
+            transition: opacity .2s, transform .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-print:hover {
+            opacity: .9;
+            transform: translateY(-2px);
+        }
+
+        /* SAVE BUTTON */
+        .btn-save {
+            margin-top: 24px;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #1a7f3c 0%, #22c55e 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            letter-spacing: .5px;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, .35);
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(34, 197, 94, .5);
+        }
+
+        .btn-save:active {
+            transform: scale(.98);
+        }
+
+        /* LOCKED STATE */
+        .sheet-locked .arrow-input input {
+            background: rgba(255, 255, 255, .03) !important;
+            border-color: rgba(255, 255, 255, .06) !important;
+            color: var(--text-main) !important;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .sheet-locked .btn-save {
+            display: none !important;
+        }
+
+        .sheet-locked .btn-clear {
+            display: none !important;
+        }
+
+        /* SAVED BANNER */
+        .saved-banner {
+            display: none;
+            align-items: center;
+            gap: 14px;
+            background: linear-gradient(135deg, rgba(26, 127, 60, .3) 0%, rgba(34, 197, 94, .15) 100%);
+            border: 1.5px solid rgba(34, 197, 94, .5);
+            border-radius: var(--radius);
+            padding: 16px 22px;
+            margin-bottom: 20px;
+            color: #86efac;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .saved-banner.visible {
+            display: flex;
+        }
+
+        .saved-banner .saved-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .saved-banner .saved-text strong {
+            display: block;
+            font-size: 1rem;
+            color: #4ade80;
+            margin-bottom: 2px;
+        }
+
+        .saved-banner .saved-time {
+            font-size: .78rem;
+            color: rgba(134, 239, 172, .7);
+        }
+
+        .saved-banner .btn-unlock {
+            margin-left: auto;
+            background: rgba(208, 2, 27, .18);
+            border: 1px solid rgba(208, 2, 27, .4);
+            color: #ff6b7a;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: .8rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            flex-shrink: 0;
+            transition: all .2s;
+        }
+
+        .saved-banner .btn-unlock:hover {
+            background: rgba(208, 2, 27, .32);
+        }
+
+        @media print {
+
+            .saved-banner,
+            .btn-save {
+                display: none !important;
+            }
+        }
+
+        /* KEYPAD HINT */
+        .keypad-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: .78rem;
+            margin-top: 10px;
+        }
+
+        .keypad-hint kbd {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: .76rem;
+            font-family: monospace;
+        }
+
+        /* back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: .85rem;
+            margin-bottom: 20px;
+            transition: color .2s;
+        }
+
+        .back-link:hover {
+            color: var(--qroo-teal);
+        }
+
+        /* ── PRINT STYLES ───────────────────────── */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            header,
+            .info-bar,
+            .search-section,
+            .btn-print,
+            .btn-clear,
+            .back-link,
+            .keypad-hint {
+                display: none !important;
+            }
+
+            .sheet-section {
+                display: block !important;
+            }
+
+            .end-card {
+                border: 1.5px solid #ccc;
+                box-shadow: none;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .arrow-input input {
+                border: 1px solid #aaa;
+                color: #000;
+                background: #fff;
+            }
+
+            .subtotal-display {
+                background: #eef;
+                color: #003781;
+                border: 1px solid #99c;
+            }
+
+            .summary-card {
+                border: 1.5px solid #003781;
+            }
+
+            .s-value.gold {
+                color: #b8860b;
+            }
+
+            .s-value.teal {
+                color: #003781;
+            }
+        }
+
+        /* ── RESPONSIVE ─────────────────────────── */
+        @media(max-width: 640px) {
+            .arrows-row {
+                grid-template-columns: repeat(3, 1fr) repeat(2, 1fr);
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .summary-item:nth-child(2) {
+                border-right: none;
+            }
+
+            .summary-item:nth-child(3) {
+                border-right: 1px solid var(--border);
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .rain-badge {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="header-icon">🏹</div>
+            <div class="header-text">
+                <h1>Hojas de Anotación – Quintana Roo &nbsp;🌧️ Lluvia</h1>
+                <p>2ª Olimpiada Estatal 2026 · Chetumal, Quintana Roo · 27 Feb – 01 Mar 2026</p>
+            </div>
+            <div class="rain-badge">🌧️ Lluvia · 26OE2ROO</div>
+        </div>
+    </header>
+
+    <div class="info-bar">
+        <div class="info-bar-inner">
+            <span>📅 <strong>Serie:</strong> Calificación</span>
+            <span>🎯 <strong>Tandas:</strong> 4 · 5 · 6</span>
+            <span>🔢 <strong>Flechas/Tanda:</strong> 6</span>
+            <span>📏 <strong>Distancia:</strong> Clasificatoria</span>
+            <span>💧 <strong>Condición:</strong> Lluvia</span>
+        </div>
+    </div>
+
+    <main>
+        <a href="index.html" class="back-link">← Regresar al inicio</a>
+
+        <!-- SEARCH -->
+        <section class="search-section" id="search-section">
+            <h2>🔍 Buscar Arquero</h2>
+            <div class="search-box-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" placeholder="Escribe tu nombre, licencia o club…"
+                    autocomplete="off" autofocus>
+            </div>
+            <div id="archer-list"></div>
+        </section>
+
+        <!-- SCORE SHEET -->
+        <section class="sheet-section" id="sheet-section">
+
+            <!-- BANNER DE GUARDADO -->
+            <div class="saved-banner" id="saved-banner">
+                <div class="saved-icon">✅</div>
+                <div class="saved-text">
+                    <strong>Hoja guardada y bloqueada</strong>
+                    <span class="saved-time" id="saved-time"></span>
+                </div>
+                <button class="btn-unlock" onclick="unlockSheet()">🔓 Desbloquear</button>
+            </div>
+
+            <div class="sheet-header-row">
+                <div class="sheet-archer-card" id="archer-card">
+                    <div class="archer-avatar" id="archer-avatar">🏹</div>
+                    <div class="archer-info">
+                        <h3 id="sheet-archer-name">—</h3>
+                        <div class="meta">
+                            Licencia: <span id="sheet-lic">—</span> &nbsp;|&nbsp;
+                            Div: <span id="sheet-div">—</span> &nbsp;|&nbsp;
+                            Cat: <span id="sheet-cat">—</span> &nbsp;|&nbsp;
+                            Club: <span id="sheet-club">—</span> &nbsp;|&nbsp;
+                            Diana: <span id="sheet-diana">—</span>
+                        </div>
+                        <div class="meta" style="margin-top:4px;">
+                            Score rondas 1-2 (referencia): <span id="sheet-prev-score"
+                                style="color:var(--qroo-gold);font-weight:700;">—</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-clear" id="btn-clear" onclick="clearSheet()">✕ Cambiar arquero</button>
+            </div>
+
+            <!-- TANDA 4 -->
+            <div class="end-card" id="end-4">
+                <div class="end-card-header">
+                    <h3>🎯 Tanda 4</h3>
+                    <div class="end-total-badge" id="end-total-4">— pts</div>
+                </div>
+                <div class="arrows-row" id="arrows-header-4">
+                    <div class="col-label">F1</div>
+                    <div class="col-label">F2</div>
+                    <div class="col-label">F3</div>
+                    <div class="col-label">F4</div>
+                    <div class="col-label">F5</div>
+                    <div class="col-label">F6</div>
+                    <div class="col-label" style="background:rgba(0,184,196,.07)">X+10</div>
+                    <div class="col-label" style="background:rgba(245,166,35,.07)">Total</div>
+                </div>
+                <div class="arrows-row" id="inputs-4"></div>
+            </div>
+
+            <!-- TANDA 5 -->
+            <div class="end-card" id="end-5">
+                <div class="end-card-header">
+                    <h3>🎯 Tanda 5</h3>
+                    <div class="end-total-badge" id="end-total-5">— pts</div>
+                </div>
+                <div class="arrows-row">
+                    <div class="col-label">F1</div>
+                    <div class="col-label">F2</div>
+                    <div class="col-label">F3</div>
+                    <div class="col-label">F4</div>
+                    <div class="col-label">F5</div>
+                    <div class="col-label">F6</div>
+                    <div class="col-label" style="background:rgba(0,184,196,.07)">X+10</div>
+                    <div class="col-label" style="background:rgba(245,166,35,.07)">Total</div>
+                </div>
+                <div class="arrows-row" id="inputs-5"></div>
+            </div>
+
+            <!-- TANDA 6 -->
+            <div class="end-card" id="end-6">
+                <div class="end-card-header">
+                    <h3>🎯 Tanda 6</h3>
+                    <div class="end-total-badge" id="end-total-6">— pts</div>
+                </div>
+                <div class="arrows-row">
+                    <div class="col-label">F1</div>
+                    <div class="col-label">F2</div>
+                    <div class="col-label">F3</div>
+                    <div class="col-label">F4</div>
+                    <div class="col-label">F5</div>
+                    <div class="col-label">F6</div>
+                    <div class="col-label" style="background:rgba(0,184,196,.07)">X+10</div>
+                    <div class="col-label" style="background:rgba(245,166,35,.07)">Total</div>
+                </div>
+                <div class="arrows-row" id="inputs-6"></div>
+            </div>
+
+            <!-- RESUMEN -->
+            <div class="summary-card">
+                <div class="summary-title">📊 Resumen – Tandas 4, 5 y 6</div>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="s-label">Score T4+T5+T6</div>
+                        <div class="s-value white" id="sum-score">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="s-label">X + 10</div>
+                        <div class="s-value teal" id="sum-xten">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="s-label">Solo X</div>
+                        <div class="s-value gold" id="sum-x">0</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="s-label">Score total (ref)</div>
+                        <div class="s-value blue" id="sum-total">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="keypad-hint" style="margin-top:12px;" id="keypad-hint">
+                Tip: escribe <kbd>X</kbd> para 10* (X), <kbd>M</kbd> o <kbd>0</kbd> para fallo, <kbd>↹ Tab</kbd> para
+                avanzar figura.
+            </p>
+
+            <button class="btn-save" id="btn-save" onclick="saveSheet()">
+                💾 Guardar y Cerrar – Ya no podré modificar esta hoja
+            </button>
+            <button class="btn-print" onclick="window.print()">🖨️ Imprimir hoja de anotación</button>
+        </section>
+    </main>
+
+    <script>
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // DATOS DE ARQUEROS – 2da Olimpiada Estatal 2026 QRoo
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const ARCHERS = [
+            { diana: "1A", lic: "MX-0049", name: "Chable Chan Diego Joel", div: "C", cat: "U21M", club: "BJ", scorePrev: 384 },
+            { diana: "1B", lic: "MX-0062", name: "Rodriguez Carrillo Marlon Arturo", div: "C", cat: "U21M", club: "OPB", scorePrev: 354 },
+            { diana: "2A", lic: "MX-0041", name: "Noh Soberanis Ian Arturo", div: "C", cat: "U21M", club: "TLM", scorePrev: 354 },
+            { diana: "2B", lic: "MX-0050", name: "Martinez Moreno Braulio Angel", div: "C", cat: "U21M", club: "BJ", scorePrev: 324 },
+            { diana: "3A", lic: "MX-0043", name: "Huerta Moya Gabriel", div: "C", cat: "U21M", club: "BJ", scorePrev: 369 },
+            { diana: "3B", lic: "MX-0042", name: "Izquierdo Izquierdo Angel Gabriel", div: "C", cat: "U21M", club: "TLM", scorePrev: 370 },
+            { diana: "4A", lic: "MX-0055", name: "Chiu Ruiz Camila", div: "C", cat: "U21W", club: "BJ", scorePrev: 377 },
+            { diana: "4B", lic: "MX-0071", name: "Torres Gonzalez Dulce Maria", div: "C", cat: "U21W", club: "OPB", scorePrev: 322 },
+            { diana: "5A", lic: "MX-0100", name: "Zamora Miranda Alexa Aitana", div: "C", cat: "U21W", club: "BJ", scorePrev: 296 },
+            { diana: "5B", lic: "MX-0077", name: "Buentello Figueroa Amelie", div: "C", cat: "U21W", club: "TLM", scorePrev: 348 },
+            { diana: "6A", lic: "MX-0076", name: "Ramirez Sancen Alexa Yenisey", div: "C", cat: "U21W", club: "PDC", scorePrev: 371 },
+            { diana: "7A", lic: "MX-0079", name: "Perez Alvarado Allison Amayrani", div: "R", cat: "U18W", club: "OPB", scorePrev: 219 },
+            { diana: "7B", lic: "MX-0025", name: "Bello Castillo Danna Camila", div: "R", cat: "U18W", club: "OPB", scorePrev: 282 },
+            { diana: "8A", lic: "MX-0028", name: "Basulto Urbina Hanna Ariel", div: "R", cat: "U18W", club: "OPB", scorePrev: 321 },
+            { diana: "8B", lic: "MX-0102", name: "Corona Monroy Ximena Izel", div: "R", cat: "U18W", club: "BJ", scorePrev: 320 },
+            { diana: "9A", lic: "MX-0029", name: "Gomez Chi Lissie", div: "R", cat: "U18W", club: "OPB", scorePrev: 257 },
+            { diana: "9B", lic: "MX-0040", name: "Perez Camacho Danna Izbe", div: "R", cat: "U18W", club: "PDC", scorePrev: 274 },
+            { diana: "10A", lic: "MX-0017", name: "Gongora Trujillo Alexa Miremi", div: "R", cat: "U18W", club: "OPB", scorePrev: 298 },
+            { diana: "10B", lic: "MX-0112", name: "Ramirez Nava Adriana Betsabe", div: "R", cat: "U18W", club: "CZM", scorePrev: 199 },
+            { diana: "11A", lic: "MX-0046", name: "Sarti Mendoza Roberto De Jesus", div: "R", cat: "U21M", club: "BJ", scorePrev: 306 },
+            { diana: "11B", lic: "MX-0059", name: "Jaramillo Serralta Gabriel Alberto", div: "R", cat: "U21M", club: "OPB", scorePrev: 370 },
+            { diana: "12A", lic: "MX-0051", name: "Garcia Guemez Victor Mateo", div: "R", cat: "U21M", club: "BJ", scorePrev: 332 },
+            { diana: "12B", lic: "MX-0064", name: "Sosa Lopez Carlos Manuel", div: "R", cat: "U21M", club: "OPB", scorePrev: 310 },
+            { diana: "13A", lic: "MX-0101", name: "Elizondo Mack Eliud Fernando", div: "R", cat: "U21M", club: "BJ", scorePrev: 380 },
+            { diana: "13B", lic: "MX-0060", name: "Kumul Chale Angel Fernando", div: "R", cat: "U21M", club: "OPB", scorePrev: 304 },
+            { diana: "14A", lic: "MX-0058", name: "Suastegui Nuñez Andrea Joseana", div: "R", cat: "U21W", club: "BJ", scorePrev: 216 },
+            { diana: "14B", lic: "MX-0054", name: "Hernandez Hernandez Ana Sofia", div: "R", cat: "U21W", club: "BJ", scorePrev: 252 },
+            { diana: "15A", lic: "MX-0073", name: "Ramirez Nava Zulema Isabel", div: "R", cat: "U21W", club: "CZM", scorePrev: 323 },
+            { diana: "15B", lic: "MX-0074", name: "Squivias Cabrera Valeska", div: "R", cat: "U21W", club: "PDC", scorePrev: 306 },
+            { diana: "16A", lic: "MX-0061", name: "Chab Quintal Yareni Miranda", div: "R", cat: "U21W", club: "OPB", scorePrev: 353 },
+            { diana: "16B", lic: "MX-0056", name: "Rodriguez Hermenegildo Evelyn", div: "R", cat: "U24W", club: "BJ", scorePrev: 301 },
+        ];
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // SEARCH
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const searchInput = document.getElementById('search-input');
+        const archerList = document.getElementById('archer-list');
+
+        function normalize(str) {
+            return str.toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function renderList(query) {
+            const q = normalize(query);
+            const filtered = q === ''
+                ? ARCHERS
+                : ARCHERS.filter(a =>
+                    normalize(a.name).includes(q) ||
+                    normalize(a.lic).includes(q) ||
+                    normalize(a.club).includes(q) ||
+                    normalize(a.diana).includes(q) ||
+                    normalize(a.cat).includes(q)
+                );
+
+            if (filtered.length === 0) {
+                archerList.innerHTML = '<div class="no-results">🔍 Sin resultados. Intenta con tu nombre, licencia o club.</div>';
+                return;
+            }
+
+            archerList.innerHTML = '';
+            filtered.forEach(a => {
+                const div = document.createElement('div');
+                div.className = 'archer-item';
+                div.setAttribute('role', 'button');
+                div.setAttribute('tabindex', '0');
+                div.innerHTML = `
+            <div class="archer-diana">${a.diana}</div>
+            <div class="archer-name">${a.name}</div>
+            <div class="archer-meta">${a.lic} · ${a.div} · ${a.cat}</div>
+            <div class="archer-club">${a.club}</div>
+        `;
+                div.addEventListener('click', () => selectArcher(a));
+                div.addEventListener('keydown', e => { if (e.key === 'Enter') selectArcher(a); });
+                archerList.appendChild(div);
+            });
+        }
+
+        searchInput.addEventListener('input', () => renderList(searchInput.value));
+        renderList('');
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // SELECT & BUILD SHEET
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        let currentArcher = null;
+
+        // store scores: { 4:[v,v,v,v,v,v], 5:[...], 6:[...] }
+        const scores = { 4: Array(6).fill(''), 5: Array(6).fill(''), 6: Array(6).fill('') };
+
+        // ── STORAGE KEY ────────────────────────────
+        function storageKey(lic) {
+            return `qroo2026_lluvia_${lic}`;
+        }
+
+        function selectArcher(a) {
+            currentArcher = a;
+
+            // fill header card
+            document.getElementById('sheet-archer-name').textContent = a.name;
+            document.getElementById('sheet-lic').textContent = a.lic;
+            document.getElementById('sheet-div').textContent = a.div;
+            document.getElementById('sheet-cat').textContent = a.cat;
+            document.getElementById('sheet-club').textContent = a.club;
+            document.getElementById('sheet-diana').textContent = a.diana;
+            document.getElementById('sheet-prev-score').textContent = a.scorePrev + ' pts';
+
+            // avatar emoji by division
+            document.getElementById('archer-avatar').textContent = a.div === 'C' ? '🏹' : '🎯';
+
+            // reset scores
+            scores[4] = Array(6).fill('');
+            scores[5] = Array(6).fill('');
+            scores[6] = Array(6).fill('');
+
+            // check if already saved
+            const savedPromise = loadSaved(a.lic);
+
+            // build inputs for each tanda
+            [4, 5, 6].forEach(t => buildEndInputs(t));
+
+            // show sheet first (so inputs exist in DOM)
+            document.getElementById('sheet-section').classList.add('visible');
+            document.getElementById('search-section').style.display = 'none';
+            document.getElementById('sheet-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // show loading indicator while checking server
+            document.getElementById('btn-save').innerHTML = '⏳ Verificando servidor...';
+            document.getElementById('btn-save').disabled = true;
+
+            // if saved, fill inputs and lock
+            savedPromise.then(saved => {
+                document.getElementById('btn-save').innerHTML = '💾 Guardar y Cerrar – Ya no podré modificar esta hoja';
+                document.getElementById('btn-save').disabled = false;
+                if (saved) {
+                    [4, 5, 6].forEach(t => {
+                        (saved.scores[t] || []).forEach((v, i) => {
+                            scores[t][i] = v;
+                            const inp = document.getElementById(`t${t}-f${i + 1}`);
+                            if (inp) { inp.value = v; applyInputStyle(inp, v); }
+                        });
+                        recalc(t);
+                    });
+                    lockSheet(saved.savedAt);
+                } else {
+                    unlockSheetUI();
+                }
+            });
+        }
+
+        function buildEndInputs(tanda) {
+            const container = document.getElementById(`inputs-${tanda}`);
+            container.innerHTML = '';
+            scores[tanda] = Array(6).fill('');
+
+            // 6 arrow inputs
+            for (let i = 0; i < 6; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'arrow-input';
+
+                const inp = document.createElement('input');
+                inp.type = 'text';
+                inp.inputMode = 'numeric';
+                inp.maxLength = 2;
+                inp.id = `t${tanda}-f${i + 1}`;
+                inp.placeholder = '—';
+                inp.setAttribute('aria-label', `Tanda ${tanda} Flecha ${i + 1}`);
+
+                inp.addEventListener('input', () => handleArrowInput(inp, tanda, i));
+                inp.addEventListener('keydown', e => handleKey(e, tanda, i));
+
+                cell.appendChild(inp);
+                container.appendChild(cell);
+            }
+
+            // X+10 subtotal
+            const xtenCell = document.createElement('div');
+            xtenCell.className = 'subtotal-cell';
+            const xtenDisp = document.createElement('div');
+            xtenDisp.className = 'subtotal-display xten';
+            xtenDisp.id = `xten-${tanda}`;
+            xtenDisp.textContent = '0';
+            xtenCell.appendChild(xtenDisp);
+            container.appendChild(xtenCell);
+
+            // Score subtotal
+            const totCell = document.createElement('div');
+            totCell.className = 'subtotal-cell';
+            const totDisp = document.createElement('div');
+            totDisp.className = 'subtotal-display';
+            totDisp.id = `sub-${tanda}`;
+            totDisp.textContent = '0';
+            totCell.appendChild(totDisp);
+            container.appendChild(totCell);
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // INPUT LOGIC
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function parseArrow(raw) {
+            if (!raw) return null;
+            const v = raw.trim().toUpperCase();
+            if (v === 'X') return 10; // X = 10*
+            if (v === 'M' || v === '0') return 0;
+            const n = parseInt(v, 10);
+            if (!isNaN(n) && n >= 1 && n <= 10) return n;
+            if (n === 0) return 0;
+            return null;
+        }
+
+        function handleArrowInput(inp, tanda, idx) {
+            const raw = inp.value;
+            const parsed = parseArrow(raw);
+
+            // styling
+            inp.classList.remove('val-10', 'val-x', 'val-m', 'val-mid');
+            if (raw.toUpperCase() === 'X') {
+                inp.classList.add('val-x');
+            } else if (parsed === 10) {
+                inp.classList.add('val-10');
+            } else if (parsed === 0) {
+                inp.classList.add('val-m');
+            } else if (parsed !== null && parsed >= 7) {
+                inp.classList.add('val-mid');
+            }
+
+            scores[tanda][idx] = raw.trim();
+            recalc(tanda);
+
+            // auto-advance if value is complete (X, M, or 2-digit number)
+            if (raw.toUpperCase() === 'X' || raw.toUpperCase() === 'M' || (parsed !== null && raw.length >= (parsed >= 10 ? 2 : 1) && parsed <= 9)) {
+                if (raw.length >= 1 && parsed !== null) {
+                    // advance only when they press a digit/X/M — handled by keydown for digits
+                }
+            }
+        }
+
+        function handleKey(e, tanda, idx) {
+            if (e.key === 'Tab') return; // default
+            if (e.key === 'ArrowRight' || e.key === 'Enter') {
+                e.preventDefault();
+                focusNext(tanda, idx);
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                focusPrev(tanda, idx);
+            }
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                focusNext(tanda, idx, true);
+            }
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                focusPrev(tanda, idx, true);
+            }
+            // single-key X or M auto-advances
+            if ((e.key.toUpperCase() === 'X' || e.key.toUpperCase() === 'M') && !e.ctrlKey) {
+                setTimeout(() => focusNext(tanda, idx), 50);
+            }
+        }
+
+        function focusNext(tanda, idx, crossEnd = false) {
+            if (idx < 5) {
+                document.getElementById(`t${tanda}-f${idx + 2}`)?.focus();
+            } else if (crossEnd) {
+                const next = tanda < 6 ? tanda + 1 : null;
+                if (next) document.getElementById(`t${next}-f1`)?.focus();
+            }
+        }
+        function focusPrev(tanda, idx, crossEnd = false) {
+            if (idx > 0) {
+                document.getElementById(`t${tanda}-f${idx}`)?.focus();
+            } else if (crossEnd) {
+                const prev = tanda > 4 ? tanda - 1 : null;
+                if (prev) document.getElementById(`t${prev}-f6`)?.focus();
+            }
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // RECALCULATE
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function recalc(tanda) {
+            const vals = scores[tanda];
+            let total = 0;
+            let xten = 0;
+            let onlyX = 0;
+
+            vals.forEach(v => {
+                const raw = v.trim().toUpperCase();
+                const n = parseArrow(raw);
+                if (n === null) return;
+                total += n;
+                if (n === 10) xten++;
+                if (raw === 'X') { onlyX++; }
+            });
+
+            document.getElementById(`sub-${tanda}`).textContent = total;
+            document.getElementById(`xten-${tanda}`).textContent = xten;
+            document.getElementById(`end-total-${tanda}`).textContent = total > 0 ? `${total} pts` : '— pts';
+
+            recalcSummary();
+        }
+
+        function recalcSummary() {
+            let totalScore = 0;
+            let totalXten = 0;
+            let totalX = 0;
+
+            [4, 5, 6].forEach(t => {
+                scores[t].forEach(v => {
+                    const raw = v.trim().toUpperCase();
+                    const n = parseArrow(raw);
+                    if (n === null) return;
+                    totalScore += n;
+                    if (n === 10) totalXten++;
+                    if (raw === 'X') totalX++;
+                });
+            });
+
+            document.getElementById('sum-score').textContent = totalScore;
+            document.getElementById('sum-xten').textContent = totalXten;
+            document.getElementById('sum-x').textContent = totalX;
+
+            // running total with prev rounds
+            const prev = currentArcher?.scorePrev ?? 0;
+            document.getElementById('sum-total').textContent = (prev + totalScore) + ' pts';
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // SAVE / LOCK / UNLOCK
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // SAVE / LOCK / UNLOCK  →  Firestore + cache local
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function storageKey(lic) {
+            return `qroo2026_lluvia_${lic}`;
+        }
+
+        // ── Documento Firestore ──────────────────
+        function docRef(lic) {
+            return _db.collection(COLECCION).doc(`lluvia_${lic}`);
+        }
+
+        // ── Guardar en Firestore + localStorage ──
+        async function saveSheet() {
+            if (!currentArcher) return;
+
+            const ok = confirm(
+                `⚠️ ¿Confirmas guardar la hoja de ${currentArcher.name}?\n\n` +
+                `Una vez guardada NO podrás modificar los puntajes.\n\n` +
+                `Presiona ACEPTAR para guardar y bloquear.`
+            );
+            if (!ok) return;
+
+            // UI: spinner
+            const btn = document.getElementById('btn-save');
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Guardando en servidor...';
+
+            const savedAt = new Date().toLocaleString('es-MX', {
+                dateStyle: 'short', timeStyle: 'short'
+            });
+
+            // Calcular totales para guardar en Firestore
+            let totalScore = 0, totalXten = 0, totalX = 0;
+            [4, 5, 6].forEach(t => {
+                scores[t].forEach(v => {
+                    const raw = (v || '').trim().toUpperCase();
+                    const n = parseArrow(raw);
+                    if (n === null) return;
+                    totalScore += n;
+                    if (n === 10) totalXten++;
+                    if (raw === 'X') totalX++;
+                });
+            });
+
+            const data = {
+                competicion: '26OE2ROO',
+                evento: 'Segunda Olimpiada Estatal 2026 Quintana Roo',
+                ronda: 'Lluvia',
+                tandas: [4, 5, 6],
+                archer: {
+                    diana: currentArcher.diana,
+                    lic: currentArcher.lic,
+                    name: currentArcher.name,
+                    div: currentArcher.div,
+                    cat: currentArcher.cat,
+                    club: currentArcher.club,
+                    scorePrev: currentArcher.scorePrev
+                },
+                flechas: {
+                    t4: [...scores[4]],
+                    t5: [...scores[5]],
+                    t6: [...scores[6]]
+                },
+                totales: {
+                    scoreT456: totalScore,
+                    xMas10: totalXten,
+                    soloX: totalX,
+                    scoreTotal: currentArcher.scorePrev + totalScore
+                },
+                savedAt,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                locked: true
+            };
+
+            // Guardar en Firestore
+            try {
+                await docRef(currentArcher.lic).set(data);
+                console.log('✅ Guardado en Firestore:', currentArcher.lic);
+            } catch (err) {
+                console.warn('⚠️ No se pudo guardar en servidor, guardando localmente:', err);
+            }
+
+            // Siempre guardar copia local
+            try {
+                // Convertir data sin FieldValue para localStorage
+                const localData = { ...data, scores: { 4: [...scores[4]], 5: [...scores[5]], 6: [...scores[6]] }, timestamp: savedAt };
+                localStorage.setItem(storageKey(currentArcher.lic), JSON.stringify(localData));
+            } catch (e) { /* sin espacio */ }
+
+            btn.disabled = false;
+            btn.innerHTML = '💾 Guardar y Cerrar – Ya no podré modificar esta hoja';
+            lockSheet(savedAt);
+        }
+
+        // ── Cargar desde Firestore, fallback a localStorage ──
+        async function loadSaved(lic) {
+            // 1) Intentar Firestore
+            try {
+                const snap = await docRef(lic).get();
+                if (snap.exists) {
+                    const d = snap.data();
+                    // normalizar estructura al formato interno
+                    return {
+                        scores: {
+                            4: d.flechas?.t4 ?? Array(6).fill(''),
+                            5: d.flechas?.t5 ?? Array(6).fill(''),
+                            6: d.flechas?.t6 ?? Array(6).fill('')
+                        },
+                        savedAt: d.savedAt ?? ''
+                    };
+                }
+            } catch (e) {
+                console.warn('Firestore no disponible, buscando caché local:', e);
+            }
+            // 2) Fallback a localStorage
+            try {
+                const raw = localStorage.getItem(storageKey(lic));
+                if (!raw) return null;
+                const d = JSON.parse(raw);
+                return {
+                    scores: d.scores ?? d.flechas ?? { 4: Array(6).fill(''), 5: Array(6).fill(''), 6: Array(6).fill('') },
+                    savedAt: d.savedAt ?? ''
+                };
+            } catch (e) { return null; }
+        }
+
+        function lockSheet(savedAt) {
+            const sheet = document.getElementById('sheet-section');
+            sheet.classList.add('sheet-locked');
+
+            // disable all inputs
+            [4, 5, 6].forEach(t => {
+                for (let i = 1; i <= 6; i++) {
+                    const inp = document.getElementById(`t${t}-f${i}`);
+                    if (inp) {
+                        inp.disabled = true;
+                        inp.style.pointerEvents = 'none';
+                    }
+                }
+            });
+
+            // show saved banner
+            const banner = document.getElementById('saved-banner');
+            banner.classList.add('visible');
+            document.getElementById('saved-time').textContent =
+                `Guardado el ${savedAt} — Los cambios están bloqueados.`;
+
+            // hide save button, hint
+            document.getElementById('btn-save').style.display = 'none';
+            document.getElementById('keypad-hint').style.display = 'none';
+        }
+
+        function unlockSheetUI() {
+            const sheet = document.getElementById('sheet-section');
+            sheet.classList.remove('sheet-locked');
+            document.getElementById('saved-banner').classList.remove('visible');
+            document.getElementById('btn-save').style.display = '';
+            document.getElementById('keypad-hint').style.display = '';
+            document.getElementById('btn-clear').style.display = '';
+
+            [4, 5, 6].forEach(t => {
+                for (let i = 1; i <= 6; i++) {
+                    const inp = document.getElementById(`t${t}-f${i}`);
+                    if (inp) {
+                        inp.disabled = false;
+                        inp.style.pointerEvents = '';
+                    }
+                }
+            });
+        }
+
+        async function unlockSheet() {
+            if (!currentArcher) return;
+            const ok = confirm(
+                `🔓 ¿Deseas desbloquear la hoja de ${currentArcher.name}?\n\n` +
+                `Podrás corregir los puntajes y volver a guardar.`
+            );
+            if (!ok) return;
+            // Eliminar de Firestore y localStorage
+            try { await docRef(currentArcher.lic).delete(); } catch (e) { console.warn('No se pudo borrar de Firestore:', e); }
+            try { localStorage.removeItem(storageKey(currentArcher.lic)); } catch (e) { }
+            unlockSheetUI();
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // CLEAR / CHANGE ARCHER
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function clearSheet() {
+            currentArcher = null;
+            document.getElementById('sheet-section').classList.remove('visible');
+            document.getElementById('sheet-section').classList.remove('sheet-locked');
+            document.getElementById('saved-banner').classList.remove('visible');
+            document.getElementById('search-section').style.display = '';
+            document.getElementById('btn-save').style.display = '';
+            document.getElementById('keypad-hint').style.display = '';
+            document.getElementById('btn-clear').style.display = '';
+            searchInput.value = '';
+            renderList('');
+            searchInput.focus();
+        }
+
+        // helper: apply colour class without re-triggering input handler
+        function applyInputStyle(inp, raw) {
+            const parsed = parseArrow(raw);
+            inp.classList.remove('val-10', 'val-x', 'val-m', 'val-mid');
+            if (!raw) return;
+            if (raw.toUpperCase() === 'X') inp.classList.add('val-x');
+            else if (parsed === 10) inp.classList.add('val-10');
+            else if (parsed === 0) inp.classList.add('val-m');
+            else if (parsed !== null && parsed >= 7) inp.classList.add('val-mid');
+        }
+    </script>
+</body>
+
+</html>

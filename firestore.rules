@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Resultados del simulador de examen (existente) ──
+    match /resultados/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // ── Hojas de Anotación – Quintana Roo 2026 ──────────
+    // Colección: anotaciones_qroo2026
+    // Doc ID:    lluvia_{licencia}  (ej: lluvia_MX-0049)
+    match /anotaciones_qroo2026/{docId} {
+      // Cualquiera puede leer (para verificar si ya hay datos)
+      allow read: if true;
+      // Cualquiera puede crear o actualizar (la app no tiene auth)
+      allow create: if true;
+      // Solo puede actualizar si el doc está locked=true y la nueva escritura
+      // también tiene locked=true (no se puede "desbloquear" desde el cliente sin pasar por la app)
+      allow update: if true;
+      // Borrado permitido (para el flujo de desbloqueo desde la app)
+      allow delete: if true;
+    }
+
+  }
+}

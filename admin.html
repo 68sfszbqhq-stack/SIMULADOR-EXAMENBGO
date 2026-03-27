@@ -25,6 +25,12 @@
             <p>Vista de resultados de alumnos de 2° y 3° año</p>
         </header>
 
+        <!-- Tabs Navigation -->
+        <nav class="admin-tabs" style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button id="tab-general" class="btn btn-primary active" onclick="switchTab('general')">Simulador General</button>
+            <button id="tab-special" class="btn btn-secondary" onclick="switchTab('special')">Exámenes Especiales (1° y 2°)</button>
+        </nav>
+
         <!-- Estadísticas Generales -->
         <section class="stats-summary">
             <div class="stat-box">

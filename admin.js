@@ -27,12 +27,163 @@ function initQuestionMap() {
     console.log(`Mapa de preguntas inicializado: ${questionsMap.size} preguntas encontradas.`);
 }
 
-// Cargar resultados al iniciar
+// Control de Pestañas
+let currentTab = 'general';
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Panel de administración cargado');
-    initQuestionMap(); // Inicializar mapa de preguntas
-    loadResults();
+    initQuestionMap();
+    switchTab('general');
 });
+
+function switchTab(tab) {
+    currentTab = tab;
+    
+    // UI Update
+    const btnGeneral = document.getElementById('tab-general');
+    const btnSpecial = document.getElementById('tab-special');
+    const filters = document.querySelector('.filters');
+    const stats = document.querySelector('.stats-summary');
+    const charts = document.querySelector('.charts-container');
+    const tableHeader = document.querySelector('#results-table thead');
+    
+    if (tab === 'general') {
+        btnGeneral.className = 'btn btn-primary active';
+        btnSpecial.className = 'btn btn-secondary';
+        filters.classList.remove('hidden');
+        stats.classList.remove('hidden');
+        charts.classList.remove('hidden');
+        
+        // Restore General Table Header
+        tableHeader.innerHTML = `
+            <tr>
+                <th>Grado</th>
+                <th>Nombre</th>
+                <th>NIA</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Duración</th>
+                <th>Calificación</th>
+                <th>%</th>
+                <th>Acciones</th>
+            </tr>
+        `;
+        
+        loadResults();
+    } else {
+        btnGeneral.className = 'btn btn-secondary';
+        btnSpecial.className = 'btn btn-primary active';
+        filters.classList.add('hidden'); // Simplified for now
+        stats.classList.add('hidden');
+        charts.classList.add('hidden');
+        
+        // Special Table Header
+        tableHeader.innerHTML = `
+            <tr>
+                <th>Examen</th>
+                <th>Alumno</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Ext.</th>
+                <th>Incidentes</th>
+                <th>Acciones</th>
+            </tr>
+        `;
+        
+        loadSpecialResults();
+    }
+}
+
+async function loadSpecialResults() {
+    const tbody = document.getElementById('results-tbody');
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">Cargando exámenes especiales...</td></tr>';
+    
+    try {
+        const snapshot = await db.collection('examenes_especiales')
+            .orderBy('timestamp', 'desc')
+            .get();
+        
+        if (snapshot.empty) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">No hay exámenes especiales registrados.</td></tr>';
+            return;
+        }
+        
+        let html = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const incidentCount = data.incidentes ? data.incidentes.length : 0;
+            const incidentClass = incidentCount > 0 ? 'score-poor' : 'score-excellent';
+            
+            html += `
+                <tr>
+                    <td><strong>${data.examen === 'cultura-digital-1' ? '1° Año' : '2° Año'}</strong></td>
+                    <td>${data.alumno}</td>
+                    <td>${data.fecha}</td>
+                    <td>${data.hora}</td>
+                    <td>${data.extensionesUsed || 0}</td>
+                    <td>
+                        <span class="score-badge ${incidentClass}">
+                            ${incidentCount} reporte(s)
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-view" onclick='viewSpecialDetails(${JSON.stringify({id: doc.id, ...data}).replace(/'/g, "&apos;")})'>
+                            👁 Ver Respuestas
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = html;
+        
+    } catch (error) {
+        console.error("Error loading special results:", error);
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Error al cargar datos.</td></tr>';
+    }
+}
+
+function viewSpecialDetails(data) {
+    const modal = document.getElementById('details-modal');
+    const content = document.getElementById('details-content');
+    
+    let html = `
+        <div class="student-info">
+            <h3>Detalles del Examen Especial</h3>
+            <div class="info-grid">
+                <div class="info-item"><strong>Alumno:</strong> ${data.alumno}</div>
+                <div class="info-item"><strong>Examen:</strong> ${data.examen === 'cultura-digital-1' ? '1° Año' : '2° Año'}</div>
+                <div class="info-item"><strong>Fecha:</strong> ${data.fecha} ${data.hora}</div>
+                <div class="info-item"><strong>Extensiones:</strong> ${data.extensionesUsed || 0}</div>
+            </div>
+        </div>
+        
+        <div class="student-info">
+            <h3 style="color: #d93025;">🚩 Incidentes Detectados (${data.incidentes ? data.incidentes.length : 0})</h3>
+            <div style="background: #fff8f8; padding: 10px; border-radius: 5px; border: 1px solid #ffcdd2;">
+                ${data.incidentes && data.incidentes.length > 0 
+                    ? `<ul>${data.incidentes.map(log => `<li>${log}</li>`).join('')}</ul>`
+                    : '<p>No se detectaron intentos de trampa.</p>'}
+            </div>
+        </div>
+        
+        <h3 style="margin-top: 20px;">📝 Respuestas Escritas</h3>
+        <div class="responses-list">
+    `;
+    
+    data.respuestas.forEach((resp, index) => {
+        html += `
+            <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-left: 4px solid var(--buap-blue); border-radius: 4px;">
+                <p><strong>P${index + 1}: ${resp.pregunta}</strong></p>
+                <p style="margin-top: 10px; white-space: pre-wrap; font-style: italic;">"${resp.respuesta}"</p>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    
+    content.innerHTML = html;
+    modal.classList.remove('hidden');
+}
 
 // Función para actualizar los gráficos
 function updateCharts(resultsSource) {

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Especial - Cultura Digital</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-student {
+            padding: 15px;
+            background: #fff;
+            border: 2px solid var(--buap-blue);
+            color: var(--buap-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .btn-student:hover {
+            background: var(--buap-blue);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,59,92,0.2);
+        }
+        .timer-container {
+            position: sticky;
+            top: 20px;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--buap-blue);
+            margin-bottom: 20px;
+            z-index: 100;
+        }
+        .timer-warning {
+            color: #d93025;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .question-box {
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-top: 15px;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--buap-blue);
+        }
+        .no-copy {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1 id="exam-title">Examen de Cultura Digital</h1>
+        <p id="exam-subtitle">Selecciona tu nombre para comenzar</p>
+    </header>
+
+    <div class="main-container">
+        <!-- Student Selection -->
+        <section id="selection-container">
+            <h3>Lista de Alumnos</h3>
+            <div id="student-list" class="student-grid">
+                <!-- Students will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Exam Container -->
+        <section id="exam-container" class="hidden">
+            <div class="timer-container">
+                <span>⏱️ Tiempo restante:</span>
+                <span id="timer-display">05:30</span>
+            </div>
+
+            <div class="question-header">
+                <span id="question-progress">Pregunta 1 de X</span>
+                <span id="student-active-name">Alumno: Nome</span>
+            </div>
+
+            <div class="question-content no-copy">
+                <h2 id="question-text" class="question-text">¿Pregunta?</h2>
+                <div class="question-box">
+                    <label for="answer-input">Tu respuesta:</label>
+                    <textarea id="answer-input" placeholder="Escribe tu respuesta aquí..."></textarea>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button id="btn-next" class="btn btn-primary">Siguiente Pregunta</button>
+            </div>
+        </section>
+
+        <!-- Results / Finished -->
+        <section id="finished-container" class="hidden">
+            <div style="text-align: center; padding: 40px;">
+                <h2 style="color: var(--success);">¡Examen Finalizado!</h2>
+                <p>Tus respuestas han sido guardadas y enviadas al profesor correctamente.</p>
+                <div class="score-circle">
+                    <span style="font-size: 2.5rem;">✅</span>
+                </div>
+                <button onclick="window.location.href='index.html'" class="btn btn-primary">Volver al Inicio</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Extensión Tiempo -->
+    <div id="time-extension-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>⏳ ¿Necesitas más tiempo?</h2>
+            <p>Se te han terminado los 5 minutos y 30 segundos. ¿Deseas solicitar una extensión de 2 minutos?</p>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button id="btn-extend-time" class="btn btn-primary">Sí, 2 minutos más</button>
+                <button id="btn-finish-time" class="btn btn-secondary">No, terminar ahora</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="exam-data.js"></script>
+    <script src="especiales.js"></script>
+</body>
+</html>
