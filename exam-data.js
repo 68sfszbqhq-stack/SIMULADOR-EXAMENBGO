@@ -62,7 +62,13 @@ const EXAM_DATA = {
             { "id": 3, "text": "¿Cómo se llama la Inteligencia Artificial creada por OpenAI?", "type": "text" },
             { "id": 4, "text": "¿Cuál es la Inteligencia Artificial creada por el país China más popular?", "type": "text" },
             { "id": 5, "text": "¿Cómo se llama el paper (investigación) que cambió todo el desarrollo de la Inteligencia Artificial (desarrollado por DeepMind de Google)?", "type": "text" },
-            { "id": 6, "text": "Describe cómo generaste el prompt para tener un cuestionario para elección de carrera.", "type": "text" }
+            { "id": 6, "text": "Describe cómo generaste el prompt para tener un cuestionario para elección de carrera.", "type": "text" },
+            { "id": 7, "text": "¿Cómo se llama la Inteligencia Artificial creada por la empresa Anthropic?", "type": "text" },
+            { "id": 8, "text": "¿Cómo se llama la Inteligencia Artificial que desarrolla la empresa Meta (Facebook)?", "type": "text" },
+            { "id": 9, "text": "¿Cómo se llama el chatbot de Inteligencia Artificial que tiene integrado el buscador Bing de Microsoft?", "type": "text" },
+            { "id": 10, "text": "¿Qué significa la sigla 'GPT' en el nombre de ChatGPT?", "type": "text" },
+            { "id": 11, "text": "¿Cómo se llama la Inteligencia Artificial de Elon Musk instalada en la red social X (antes Twitter)?", "type": "text" },
+            { "id": 12, "text": "Menciona dos riesgos o peligros éticos del uso de la Inteligencia Artificial en la educación.", "type": "text" }
         ],
         "timerSeconds": 330 // 5m 30s
     }
